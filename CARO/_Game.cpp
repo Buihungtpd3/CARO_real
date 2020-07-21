@@ -6,6 +6,7 @@ _Game::_Game (int pSize, int pLeft, int pTop) {
 	_command = -1;
 	_x = pLeft; 
 	_y = pTop;
+	_i = _j = 0; // i hang va j cot tren ban co 
 }
 _Game::~_Game() {
 	delete _b;
@@ -53,13 +54,13 @@ bool _Game::processCheckBoard()
 }
 int _Game::processFinish() {
 
-	_Common::gotoXY(0, _b->getYAt(_b->getSize() - 1, _b->getSize() - 1) + 2);
-	int whoWin = _b->testBoard(_x, _y, _turn);
+	//_Common::gotoXY(0, _b->getYAt(_b->getSize() - 1, _b->getSize() - 1) + 2);
+	int whoWin = _b->testBoard(_i, _j, _turn);
 	switch (whoWin)
 	{
-		case -1: { cout << "\t\t\t\\t\t\t\t\tPlayer 1 win"; break; }
-		case 1: {cout << "\t\t\t\t\t\t\t\t\t\tPlayer 2 win"; break; }
-		case 0: {cout << "\t\t\t\t\t\t\t\t\t\tdraw"; break; }
+		case -1: { cout << "\t\t\t\t\t\t\t\t\t\t\tPlayer 1 win"; break; }
+		case 1: {cout << "\t\t\t\t\t\t\t\t\t\t\t\tPlayer 2 win"; break; }
+		case 0: {cout << "\t\t\t\t\t\t\t\t\t\t\t\tdraw"; break; }
 		case 2: _turn = !_turn;//Doi luot neu khong gi xay ra !
 	}
 	_Common::gotoXY(_x, _y);
@@ -68,24 +69,28 @@ int _Game::processFinish() {
 void _Game::moveRight() {
 	if (_x < _b->getXAt(_b->getSize() - 1, _b->getSize() - 1)) {
 		_x += 4;
+		_j++;
 		_Common::gotoXY(_x, _y);
 	}
 }
 void _Game::moveLeft() {
 	if (_x > _b->getXAt(0, 0)) {
 		_x -= 4;
+		_j--;
 		_Common::gotoXY(_x, _y);
 	}
 }
 void _Game::moveDown() {
 	if (_y < _b->getYAt(_b->getSize() - 1, _b->getSize() - 1)) {
 		_y += 2;
+		_i++;
 		_Common::gotoXY(_x, _y);
 	}
 }
 void _Game::moveUp() {
 	if (_y > _b->getYAt(0, 0)) {
 		_y -= 2;
+		_i--;
 		_Common::gotoXY(_x, _y);
 	}
 }

@@ -3,6 +3,7 @@
 #include <iostream>
 class _Point {
 	int _x, _y, _check;
+	
 public:
 	_Point();
 	_Point(int, int);
@@ -12,5 +13,6 @@ public:
 	int getY();
 	void setX(int);
 	void setY(int);
+	
 };
 #endif

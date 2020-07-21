@@ -21,9 +21,10 @@ public:
 	void drawBoard();
 	int checkBoard(int, int, bool);
 	int testBoard(int,int,bool);
-	bool checkRow(int,int);
-	bool checkColum(int, int);
+	bool checkRow(int, int);
+	/*bool checkColum(int, int);
 	bool checkMainDioganal(int, int);
-	bool checkSubDioganal(int, int);
+	bool checkSubDioganal(int, int);*/
+
 };
 #endif

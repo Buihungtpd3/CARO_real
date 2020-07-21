@@ -55,7 +55,7 @@ Label_1:
 	t.startGame();
 	
 	while (t.isContinue()) {
-	Label_temp:
+
 		t.waitKeyBoard();
 		if (t.getCommand() == 27)
 		{
@@ -101,8 +101,6 @@ Label_1:
 								t.exitGame();
 							}
 							else t.startGame();
-						
-						case 2: goto Label_temp;
 					}				
 				}
 			}

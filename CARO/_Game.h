@@ -8,6 +8,7 @@ class _Game : public _Board {
 	int _x, _y;
 	int _command;
 	bool _loop;
+	int _i, _j;
 public:
 	_Game(int, int, int);
 	~_Game();
