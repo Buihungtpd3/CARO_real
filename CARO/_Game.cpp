@@ -18,6 +18,7 @@ bool _Game::isContinue() {
 	return _loop;
 }
 char _Game::waitKeyBoard() {
+	//Nhan phim tu ban phim
 	_command = toupper(_getch());
 	return _command;
 }
@@ -28,10 +29,10 @@ char _Game::askContinue() {
 void _Game::startGame()
 {
 	system("cls");
-	_b->resetData();
-	_b->drawBoard();
-	_x = _b->getXAt(0, 0);
-	_y = _b->getYAt(0, 0);
+	_b->resetData();// Gan gia tri 0 cho cac o tren ban co
+	_b->drawBoard();// Ve ban co
+	_x = _b->getXAt(0, 0);// Tra ve vi tri cua con tro tren man hinh theo truc hoanh
+	_y = _b->getYAt(0, 0);//Tra ve vi tri cua con tro tren man hinh theo truc tung
 }
 void _Game::exitGame()
 {
@@ -55,7 +56,7 @@ bool _Game::processCheckBoard()
 int _Game::processFinish() {
 
 	//_Common::gotoXY(0, _b->getYAt(_b->getSize() - 1, _b->getSize() - 1) + 2);
-	int whoWin = _b->testBoard(_i, _j, _turn);
+	int whoWin = _b->testBoard(_i, _j, _turn);//Ham test board nhan vao vi tri cua moi o co, luot choi va tra ve ket 1 so tuong ung voi cac truong hop
 	switch (whoWin)
 	{
 		case -1: { cout << "\t\t\t\t\t\t\t\t\t\t\tPlayer 1 win"; break; }

@@ -57,7 +57,7 @@ Label_1:
 	while (t.isContinue()) {
 
 		t.waitKeyBoard();
-		if (t.getCommand() == 27)
+		if (t.getCommand() == 27)// Neu bang ESC thi luu game r thoat
 		{
 			//Luu Game 
 			//...........

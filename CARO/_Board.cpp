@@ -33,6 +33,7 @@ _Board::~_Board() {
 }
 void _Board::resetData() {
 	if (_size == 0) return;
+	//Ve ban co, co i hang va j cot ( j <=> x, i <=> y)
 	for (int i = 0; i < _size; i++) {
 		for (int j = 0; j < _size; j++) {
 			_pArr[i][j].setX(4 * j + _left + 2);
@@ -173,7 +174,7 @@ bool _Board::checkSubDioganal(int i, int j)
 	return false;
 }
 int _Board::testBoard(int i, int j, bool pturn) { 
-	//-1: player 1 win, 1: player 2 win, 0: hoa, 2 binh thuong.
+	//kiem tra thang thua va tra lai ket qua : -1: player 1 win, 1: player 2 win, 0: hoa, 2 binh thuong.
 	if (checkRow(i, j) == true || checkColum(i,j) == true || checkMainDioganal(i,j) == true || checkSubDioganal(i,j) == true)
 	{
 		if (pturn) return -1;
