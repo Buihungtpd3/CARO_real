@@ -7,7 +7,9 @@
 class _Board : public _Point, public _Menu{
 	int _size;
 	int _left, _top;
+	int cdraw = 0;
 	_Point** _pArr;
+	int _cdraw = 0;
 public:
 	_Board();
 	_Board(int, int, int);
@@ -25,6 +27,6 @@ public:
 	bool checkColum(int, int);
 	bool checkMainDioganal(int, int);
 	bool checkSubDioganal(int, int);
-
+	bool checkDraw();
 };
 #endif
