@@ -29,5 +29,6 @@ bool _Point::setCheck(int pCheck)
 	}
 	return false;
 }
+
 _Point::_Point() { _x = _y = _check = 0; }
 _Point::_Point(int pX, int pY) { _x = pX; _y = pY; _check = 0;}

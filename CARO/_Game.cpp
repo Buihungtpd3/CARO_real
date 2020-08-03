@@ -7,6 +7,7 @@ _Game::_Game (int pSize, int pLeft, int pTop) {
 	_x = pLeft; 
 	_y = pTop;
 	_i = _j = 0; // i hang va j cot tren ban co 
+	turnX = turnO = 0;
 }
 _Game::~_Game() {
 	delete _b;
@@ -23,8 +24,11 @@ char _Game::waitKeyBoard() {
 	return _command;
 }
 char _Game::askContinue() {
-	_Common::gotoXY(0, _b->getYAt(_b->getSize() - 1, _b->getSize() - 1) + 4);
-	return waitKeyBoard();
+	system("cls");
+	cout << "Do you want to continue? <Y/N> ";
+	char choice;
+	cin >> choice;
+	return choice;
 }
 void _Game::startGame()
 {
@@ -42,12 +46,16 @@ void _Game::exitGame()
 bool _Game::processCheckBoard()
 {
 	switch (_b->checkBoard(_x, _y, _turn)) // Check board kiem tra xem muoc di hop le hay khong va tra ve 1 so
-	{									   //Neu turn = 1 rturn -1 (luot X), neu turn = 0, return 1 (luot O)....
+	{									   //Neu turn = true rturn -1 (luot X), neu turn = false, return 1 (luot O)....
 	case -1: 
-		cout << "X";
+	{
+		cout << "X";	
+	}
 		break;
 	case 1: 
+	{	
 		cout << "O";
+	}
 		break;
 	case 0: return false;
 	}
@@ -95,18 +103,48 @@ void _Game::moveUp() {
 		_Common::gotoXY(_x, _y);
 	}
 }
+// Choi voi may che do de 
+//void _Game::playWithAi()
+//{
+//	
+//	srand((int)time(0));
+//	int row, colum;
+//	map<int, bool> vis_row;
+//	map<int, bool> vis_colum;
+//	do 
+//	{
+//		do {
+//			row =  rand() % (20);
+//		} while (vis_row.find(row) != vis_row.end());
+//		do {
+//			colum =  rand() % (20);
+//		} while (vis_colum.find(colum) != vis_colum.end());
+//
+//	} while (_b->checkBoard(row,colum,_turn) != 0);
+//	vis_row[row] = true;
+//	vis_colum[colum] = true;
+//	_i = row; _j = colum;
+//	_x = _b->getXAt(_i, _j);
+//	_y = _b->getYAt(_i, _j);
+//	gotoXY(_x, _y);
+//}
 
-void _Game::saveGame()
+//Choi voi may che do kho 
+void _Game::playWithAi()
 {
-	//chua cai dat
+	int* result = new int[2];
+	findThebestMove(result);
+	
+	_i = *result;
+	_j = *(result + 1);
+	_x = _b->getXAt(_i, _j);
+	_y = _b->getYAt(_i, _j);
+	checkBoard(_x, _y, _turn);
+	gotoXY(_x, _y);	
 }
 void _Game::loadGame()
 {
 	//chua cai dat
 }
 
-void _Game::law()
-{
-	//chua cai dat
-}
 

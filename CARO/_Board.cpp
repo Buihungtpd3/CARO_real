@@ -24,8 +24,8 @@ _Board::_Board(int pSize, int pX, int pY)
 	_size = pSize;
 	_left = pX;
 	_top = pY;
-	_pArr = new _Point * [pSize];
-	for (int i = 0; i <= pSize; i++) _pArr[i] = new _Point[pSize];
+	_pArr = new _Point * [pSize+1];
+	for (int i = 0; i <= pSize; i++) _pArr[i] = new _Point  [pSize];
 }
 _Board::~_Board() {
 	for (int i = 0; i < _size; i++) delete[] _pArr[i];
@@ -42,19 +42,62 @@ void _Board::resetData() {
 		}
 	}
 }
+//Ham ve vien tren , duoi ========================================================================
+void _Board::drawUpLine(int left, int top, char symbol1,char symbol2, char symbol3,int size)
+{
+	_Common::gotoXY(left, top);//Dua con tro den vi tri dau ban co
+	for (int i = 0; i <= size * 4; i++)
+	{
+		if (i == 0) cout << symbol1;//218 la ma ascii cua goc vuong ben trai phia tren
+		else if (i == size * 4) cout <<symbol2;//191 la ma ascii cua goc vuong phai phia tren
+		else cout << symbol3;
+	}
+}
+
+//Ham ve vien trai, phai =============================================================================
+void _Board::drawSlideLine(int left, int top, char symbol, int size)
+{
+	_Common::gotoXY(left, top);
+	for (int i = 0; i < size * 2 - 1; i++)
+	{
+		_Common::gotoXY(left, i + top + 1);
+		cout << symbol;
+	}
+}
 void _Board::drawBoard() {
-	//Ve ban co ne 
+	//Ve ban co
 	if (_pArr == NULL) return;
 	for (int i = 0; i <= _size; i++) {
+		
 		for (int j = 0; j <= _size; j++) {
+			
 			_Common::gotoXY(_left + 4 * i, _top + 2 * j);
 			printf(".");
 		}
 	}
-	_Common::gotoXY(_pArr[0][0].getX(), _pArr[0][0].getY());
+	//Ve vien (char + so  la ky tu dac biet trong ascii)
+	drawUpLine(_left, _top, (char)218, (char)191, (char)196, _size);//Ve vien tren
+	drawSlideLine(_left + 4 * _size, _top, (char)179, _size);//Ve vien ben phai
+	drawUpLine(_left, _top + _size * 2,(char) 192, (char)217, (char)196,_size);//Ve vien duoi
+	drawSlideLine(_left, _top, (char)179,_size);//Ve vien ben trai
 	//Ve cai bang nho nho xinh xinh ben canh ban co
-		
-
+	drawUpLine(_left + _size*4+20, _top +10, (char)201, (char)187, (char)205, 10);//Ve vien tren
+	drawSlideLine(_left + _size*4+20+40, _top+10, (char)186, 6);//Ve vien ben phai
+	drawUpLine(_left + _size * 4 + 20, _top + 6 * 2 +10, (char)200, (char)188, (char)205, 10);//Ve vien duoi
+	drawSlideLine(_left+_size*4+20, _top+10, (char)186, 6);//Ve vien ben trai
+	//In cai bang
+	_Common::textColor(9);
+	gotoXY(_left + _size * 4 + 30, _top + 12);
+	cout << "PLAYER 1";
+	gotoXY(_left + _size * 4 + 48, _top + 12);
+	cout << "PLAYER 2";
+	gotoXY(_left + _size * 4 + 22, _top + 14);
+	cout << "Turn:";
+	gotoXY(_left + _size * 4 + 22, _top + 16);
+	cout << "PRESS L TO SAVE GAME";
+	gotoXY(_left + _size * 4 + 22, _top + 18);
+	cout << "PRESS ESC TO EXIT GAME"; 
+	_Common::gotoXY(_pArr[0][0].getX(), _pArr[0][0].getY());
 }
 int _Board::checkBoard (int pX, int pY, bool pTurn) {
 	for (int i = 0; i < _size; i++) {
@@ -220,8 +263,8 @@ int _Board::testBoard(int i, int j, bool pturn) {
 	_cdraw++;
 	if (checkRow(i, j) == true || checkColum(i,j) == true || checkMainDioganal(i,j) == true || checkSubDioganal(i,j) == true)
 	{
-		if (pturn) return -1;
-		else return 1;
+		if (pturn) return -1; // X win
+		else return 1;// O win
 	}
 	if (checkDraw())
 		return 0;
@@ -237,4 +280,106 @@ bool _Board::checkDraw()
 {
 	if (_cdraw == 400) return true;
 	return false;
+}
+int _Board::getCDraw()
+{
+	return _cdraw;
+}
+int _Board::getScore(int i, int j, int depth)
+{
+	if (checkRow(i, j) == true || checkColum(i, j) == true || checkMainDioganal(i, j) == true || checkSubDioganal(i, j) == true)
+	{
+		if (_pArr[i][j].getCheck() == -1) return -10 + depth;
+		else if (_pArr[i][j].getCheck() == 1) return 10 - depth;
+	}
+	return 0;
+}
+//Thay doi trang thai quan co tai 1 o bat ky
+void _Board::setCheckOnBoard(int i, int j, int value)
+{
+	_pArr[i][j].setCheck(value);
+}
+int _Board::getCheckOnBoard(int i, int j)
+{
+	return _pArr[i][j].getCheck();
+}
+_Point** _Board::getParr()
+{
+	return _pArr;
+}
+
+int _Board ::Minimax(int i, int j, int depth, int a, int b, bool isMax)
+{
+	if (depth == 0 || getCDraw() == getSize() * getSize())
+	{
+		int Score = getScore(i, j, depth);
+		return Score;
+	}
+	if (isMax)
+	{
+		int maxEval = INT_MIN;
+		for (int k = 0; k < getSize(); k++)
+			for (int h = 0; h < getSize(); h++)
+			{
+				if (_pArr[k][h].getCheck() == 0)
+				{
+					_pArr[k][h].setCheck(1);//Tao nuoc di gia
+					int evaluation = Minimax(k, h, depth - 1, a, b, !isMax);
+					maxEval = max(maxEval, evaluation);
+					a = max(maxEval, evaluation);
+					if (b <= a) break;
+					_pArr[k][h].setCheck(0);//Tra ve nhu cu
+				}
+			}
+		return maxEval;
+	}
+	else
+	{
+		int minEval = INT_MAX;
+		for (int k = 0; k < getSize(); k++)
+			for (int h = 0; h < getSize(); h++)
+			{
+				if (_pArr[k][h].getCheck() == 0)
+				{
+					_pArr[k][h].setCheck(-1);//Tao nuoc di gia
+					int evaluation = Minimax(k, h, depth - 1, a, b, !isMax);
+					minEval = min(minEval, evaluation);
+					b = min(minEval, evaluation);
+					if (b <= a) break;
+					_pArr[k][h].setCheck(0);//Tra ve nhu cu
+				}
+			}
+		return minEval;
+	}
+}
+void _Board :: findThebestMove(int*& result)
+{
+	int bestMove = INT_MIN;
+	int moveVal = 0;
+	int depth = 10;
+	int a = INT_MIN;
+	int b = INT_MAX;
+	bool isMax = true;
+
+	for (int i = 0; i < getSize(); i++)
+	{
+		for (int j = 0; j < getSize(); j++)
+		{
+			if (_pArr[i][j].getCheck() != 0)
+			{
+				_pArr[i][j].setCheck(1);
+				moveVal = Minimax(i, j, depth, a, b, isMax);
+				_pArr[i][j].setCheck(0);
+			}
+			if (moveVal > bestMove)
+			{
+				bestMove = moveVal;
+				*result = i;
+				*(result + 1) = j;
+			}
+		}
+	}
+	result[0] = 10;
+	result[1] = 10;
+
 }

@@ -111,7 +111,7 @@ void _Menu::displayMenu()
 	gotoXY(x, 14);
 	cout << h << " LOAD GAME";
 	gotoXY(x, 15);
-	cout << h << " SAVE GAME";
+	cout << h << " PLAY WITH PC";
 	gotoXY(x, 16);
 	cout << h << " RULE";
 	gotoXY(x, 17);

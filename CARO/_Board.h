@@ -10,6 +10,10 @@ class _Board : public _Point, public _Menu{
 	int cdraw = 0;
 	_Point** _pArr;
 	int _cdraw = 0;
+
+	void drawSlideLine(int, int, char,int);//ve vien trai phai
+	void drawUpLine(int, int,char,char,char,int);//Ve vien tren duoi
+	
 public:
 	_Board();
 	_Board(int, int, int);
@@ -28,5 +32,13 @@ public:
 	bool checkMainDioganal(int, int);
 	bool checkSubDioganal(int, int);
 	bool checkDraw();
+	int getCDraw();
+	int getScore(int, int, int);
+	void setCheckOnBoard(int, int, int);
+	int getCheckOnBoard(int, int);
+	_Point** getParr();
+	//=========================================
+	int Minimax(int, int, int, int, int, bool);
+	void findThebestMove(int*&);
 };
 #endif
