@@ -63,7 +63,7 @@ bool _Game::processCheckBoard()
 }
 int _Game::processFinish() {
 
-	//_Common::gotoXY(0, _b->getYAt(_b->getSize() - 1, _b->getSize() - 1) + 2);
+	_Common::gotoXY(0, _b->getYAt(_b->getSize() - 1, _b->getSize() - 1) + 2);
 	int whoWin = _b->testBoard(_i, _j, _turn);//Ham test board nhan vao vi tri cua moi o co, luot choi va tra ve ket 1 so tuong ung voi cac truong hop
 	switch (whoWin)
 	{
@@ -129,22 +129,89 @@ void _Game::moveUp() {
 //	gotoXY(_x, _y);
 //}
 
-//Choi voi may che do kho 
+//=========================================================
+//int _Game::Minimax(int i, int j, int depth, bool isMax, int alpha, int beta)
+//{
+//	if (depth == 0)
+//	{
+//		int score = _b->getScore(i, j, depth);
+//	}
+//	if (isMax)
+//	{
+//		int best = INT_MIN;
+//		// Traverse all cells 
+//		for (int i = 0; i < _b->getSize(); i++)
+//		{
+//			for (int j = 0; j < _b->getSize(); j++)
+//			{
+//				// Check if cell is empty 
+//				if (_b->getParr(i, j).getCheck() == 0)
+//				{
+//					// Make the move 
+//					_b->getParr(i, j).setCheck(1);
+//
+//					// Call minimax recursively and choose 
+//					// the maximum value 
+//					int val = max(best, Minimax(i, j, depth - 1, !isMax, alpha, beta));
+//					best = max(best, val);
+//					alpha = max(alpha, best);
+//					// Undo the move 
+//					_b->getParr(i, j).setCheck(0);
+//					// Alpha Beta Pruning 
+//					if (beta <= alpha)
+//						break;
+//				}
+//			}
+//		}
+//		return best;
+//	}
+//
+//	// If this minimizer's move 
+//	else
+//	{
+//		int best = INT_MAX;
+//
+//		// Traverse all cells 
+//		for (int i = 0; i < 3; i++)
+//		{
+//			for (int j = 0; j < 3; j++)
+//			{
+//				// Check if cell is empty 
+//				if (_b->getParr(i, j).getCheck() == 0)
+//				{
+//					// Make the move 
+//					_b->getParr(i, j).setCheck(-1);
+//
+//					// Call minimax recursively and choose 
+//					// the minimum value 
+//					int val = min(best, Minimax(i, j, depth - 1, !isMax, alpha, beta));
+//					best = min(best, val);
+//					beta = min(beta, best);
+//
+//					// Undo the move 
+//					_b->getParr(i, j).setCheck(0);
+//
+//					// Alpha Beta Pruning 
+//					if (beta <= alpha)
+//						break;
+//				}
+//			}
+//		}
+//		return best;
+//	}
+//}
+
 void _Game::playWithAi()
 {
-	int* result = new int[2];
-	findThebestMove(result);
-	
-	_i = *result;
-	_j = *(result + 1);
-	_x = _b->getXAt(_i, _j);
-	_y = _b->getYAt(_i, _j);
-	checkBoard(_x, _y, _turn);
-	gotoXY(_x, _y);	
+	_Point result = _b->findTheBestMove_1();
+	_j = (result.getX() - _b->getLeft() - 2) / 4;
+	_i = (result.getY() - _b->getTop() - 1) / 2;
+	_x = result.getX();
+	_y = result.getY();
+	gotoXY(_x, _y);
 }
 void _Game::loadGame()
 {
 	//chua cai dat
 }
-
 

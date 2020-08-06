@@ -5,6 +5,7 @@
 #include <time.h>
 #include <map>
 class _Game : public _Board {
+private:
 	_Board* _b;
 	bool _turn;
 	int _x, _y;
@@ -12,10 +13,10 @@ class _Game : public _Board {
 	bool _loop;
 	int _i, _j;
 	int turnX, turnO;
-	//int Minimax(_Point **, int, int, int, int&, int&, bool);
 public:
 	_Game(int, int, int);
 	~_Game();
+public:
 	int getCommand();
 	bool isContinue();
 	char waitKeyBoard();
@@ -28,8 +29,12 @@ public:
 	void moveLeft();
 	void moveUp();
 	void moveDown();
-	void playWithAi();
-	//void playWithAi(int);
+	
 	void loadGame();
+public:
+	//Choi voi may 
+	void playWithAi();
+	//int Minimax(int , int , int, bool , int , int);
+	//_Point* findTheBestMove();
 
 };

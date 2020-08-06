@@ -1,147 +1,136 @@
+#include"_Game.h"
+#include"_Common.h"
+#include"_Board.h"
+#include"_Point.h"
+#include"_Menu.h"
 #include <iostream>
-#include <windows.h>
-#include <conio.h>
+#include<conio.h>
+#include <math.h>
 using namespace std;
-void text_color(int x)
+_Board _b(10, 10, 10);
+int Minimax(_Board &_b, int i, int j, int depth, bool isMax, int alpha, int beta)
 {
-	HANDLE mau;
-	mau = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(mau, x);
-}
-void gotoXY(int column, int line)
-{
-	COORD coord;
-	coord.X = column;
-	coord.Y = line;
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
-void display()
-{
-
-	text_color(11);
-	int n = 43;
-	for (int i = 43; i >= 1; i--) {
-		Sleep(30);
-		gotoXY(i, 1);
-		char a;
-		a = 95;
-		cout << a;
-		gotoXY(n, 1);
-		a = 95;
-		cout << a;
-		n++;
-	}
-	cout << endl;
-	for (int i = 2; i <= 18; i++) {
-
-		system("color F1");
-		if (i == 3)cout << "                 ____         _          ______      ________                " << endl;
-		if (i == 4)cout << "                |   __|      |   |       |   __  |    |   __   |               " << endl;
-		if (i == 5)cout << "                |  |         |  _  |      |  |___| |    |  |    |  |               " << endl;
-		if (i == 6)cout << "                |  |        |  | |  |     |   _____|    |  |    |  |               " << endl;
-		if (i == 7)cout << "                |  |       |  |___|  |    |  ||  |      |  |    |  |               " << endl;
-		if (i == 8)cout << "                |  |___    |   _   |    |  | |  |     |  |____|  |               " << endl;
-		if (i == 9)cout << "                |______|   |__|   |__|    |__|  |__|    |__________|               ";
-		Sleep(30);
-		gotoXY(1, i);
-		char c = 179;
-		cout << c;
-		gotoXY(85, i);
-		cout << c;
-		gotoXY(2, i);
-	}
-	n = 85;
-	for (int i = 1; i <= 43; i++) {
-		Sleep(30);
-		gotoXY(i, 18);
-		char c = 95;
-		cout <<  c;
-		gotoXY(n, 18);
-		cout <<  c;
-		n--;
-	}
-	gotoXY(40, 13);
-	//text_color(12);
-	char h = 16;
-	cout << h << " START";
-	gotoXY(40, 14);
-	//text_color(13);
-	cout << h << " OPTION";
-	gotoXY(40, 15);
-	cout << h << " QUIT";
-	gotoXY(40, 13);
-
-	
-Label_1:
-	bool flag = true;
-	int i = 40;
-	int j = 13;
-	int ch = 0;
-	while (ch != 13) {
-		if (_kbhit()) {
-			ch = _getch();
-			switch (ch) {
-			case 80: {
-				//doi mau 
-				j++;
-				gotoXY(i, j);
-				break;
-			}
-			case 72: {
-				//doi mau 
-				j--;
-				gotoXY(i, j);
-				break;
-			}
-			case 77: {
-				//doi mau 
-				i++;
-				gotoXY(i, j);
-				break;
-			}
-			case 75: {
-				//doi mau 
-				i--;
-				gotoXY(i, j);
-				break;
-			}
-			}
-
+		if (depth == 0)
+		{
+			int score = _b.getScore(i, j, depth);
 		}
-	}
+		//if maximizer
+		if (isMax)
+		{
+			int best = INT_MIN;
 
-	if (i == 40 && j == 13) {
-		//setChoice(1);
-		cout << "n = 1";
-	}
-	else if (i == 40 && j == 14) {
-		//setChoice(2);
+			// Traverse all cells 
+			for (int i = 0; i < _b.getSize(); i++)
+			{
+				for (int j = 0; j < _b.getSize(); j++)
+				{
+					// Check if cell is empty 
+					if (_b.getParr(i,j).getCheck() == 0)
+					{
+						// Make the move 
+						_b.getParr(i, j).setCheck(1);
 
-		cout << "n = 2";
-	}
-	else if (i == 40 && j == 15) {
-		//setChoice(3);
-		cout << "n = 3";
-	}
-	else if (i == 40 && j == 16) {
-		//setChoice(4);
-		cout << "n = 4";
-	}
-	else if (i == 40 && j == 17) {
-		//setChoice(5);
-		cout << "n = 5";
-	}
-	else {
-		i = 40;
-		j = 13;
-		gotoXY(40, 13);
-		goto Label_1;
-	}
+						// Call minimax recursively and choose 
+						// the maximum value 
+						int val = max(best,Minimax (_b,i,j, depth-1, !isMax,alpha,beta));
+						best = max(best, val);
+						alpha = max(alpha, best);
+						// Undo the move 
+						_b.getParr(i, j).setCheck(0);
+
+						// Alpha Beta Pruning 
+						if (beta <= alpha)
+							break;
+					}
+				}
+			}
+			return best;
+		}
+
+		// If this minimizer's move 
+		else
+		{
+			int best = INT_MAX;
+
+			// Traverse all cells 
+			for (int i = 0; i < 3; i++)
+			{
+				for (int j = 0; j < 3; j++)
+				{
+					// Check if cell is empty 
+					if (_b.getParr(i,j).getCheck() == 0)
+					{
+						// Make the move 
+						_b.getParr(i, j).setCheck(-1);
+
+						// Call minimax recursively and choose 
+						// the minimum value 
+						int val = min(best, Minimax(_b, i, j, depth - 1, !isMax,alpha,beta));
+						best = min(best, val);
+						beta = min(beta, best);
+						// Undo the move 
+						_b.getParr(i, j).setCheck(0);
+						// Alpha Beta Pruning 
+						if (beta <= alpha)
+							break;
+					}
+				}
+			}
+			return best;
+		}
+}
+_Point* findTheBestMove(_Board &_b)
+{
+	_Point* ocurPtr = new _Point;
+	int moveVal = 0;
+	int bestMove = INT_MIN;
+	int a = INT_MIN;
+	int b = INT_MAX;
+	bool isMAX = true;
+	
+	for (int i = 0; i < _b.getSize(); i++)
+		for (int j = 0; j < _b.getSize(); j++)
+		{
+			if (_b.getParr(i, j).getCheck() == 0)
+			{
+				_b.getParr(i, j).setCheck(1);
+				moveVal = Minimax(_b,i, j, _b.getSize() / 2,!isMAX,a,b);
+				_b.getParr(i, j).setCheck(0);
+				if (moveVal > bestMove)
+				{
+					bestMove = moveVal;
+					ocurPtr->setX(_b.getParr(i, j).getX());
+					ocurPtr->setY(_b.getParr(i, j).getY());
+				}
+			}
+		}
+	
+	return ocurPtr;
 }
 int main()
 {
+	int moveVal = 0;
+	int bestMove = INT_MIN;
+	int a = INT_MIN;
+	int b = INT_MAX;
+	bool isMAX = true;
 	
-	display();
-	cout << "\n\n\n\n\n\n\n\n\n\n";
+	_b.resetData();
+	_b.getParr(0, 0).setCheck(-1);
+	_b.getParr(0, 1).setCheck(-1);
+	cout << "Vi tri (0,0)" << endl;
+	cout << _b.getParr(0, 0).getX() << endl;
+	cout << _b.getParr(0, 0).getY() << endl;
+	cout << "Vi tri (0,1)" << endl;
+	cout << _b.getParr(0, 1).getX() << endl;
+	cout << _b.getParr(0, 1).getY() << endl;
+
+	_Point* cur = new _Point;
+	cur = findTheBestMove(_b);
+	cout << "Vi tri danh co" << endl;
+	cout << cur->getX() << endl;
+	cout << cur->getY();
+
+	
 	return 0;
 }
