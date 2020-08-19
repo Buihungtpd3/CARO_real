@@ -445,7 +445,6 @@ void _Menu::printCaro()
 
 void _Menu::printOptions()
 {
-
 	int x = 85;
 	gotoXY(x, 9);
 	char h = 41;

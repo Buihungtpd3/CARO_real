@@ -71,7 +71,8 @@ Label_main:
 	{
 		//Load Game
 		system("cls");
-		cout << "Ham Load game\n";
+		cout << "Ham Load game    \n";
+		cout << "12345";
 		system("pause");
 		break;
 	}
