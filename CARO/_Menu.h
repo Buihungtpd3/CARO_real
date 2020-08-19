@@ -4,7 +4,7 @@
 #include <conio.h>
 #include <stdlib.h>
 #include "_Common.h"
-
+using namespace std;
 
 class _Menu : public _Common{
 	int _choice;
@@ -14,6 +14,9 @@ public:
 	void setChoice();
 	int getChoice();
 	void displayMenu();
-	void textColor(int);
-	void move(char&);
+	void print();
+	void printCaro();
+	void printOptions();
+	void hidePtr();
+	void showPtr();
 };

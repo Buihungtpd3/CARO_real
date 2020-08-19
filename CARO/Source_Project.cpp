@@ -10,7 +10,7 @@ using namespace std;
 int main() {
 Label_main:
 	system("cls");
-	_Common::resizeConsole(1200, 800);
+	_Common::resizeConsole(1520, 1080);
 	_Common::fixConsoleWindow();
 	system("cls");
 	_Menu m;
@@ -18,9 +18,8 @@ Label_main:
 	m.setChoice();
 	int userChosen = m.getChoice();
 	switch (userChosen)
-	{
-		//Nguoi vs Nguoi
-	case 1:
+	{		
+	case 1://Nguoi vs Nguoi
 	{
 		system("cls");
 		_Game t(20, 10, 5);
@@ -76,9 +75,9 @@ Label_main:
 		system("pause");
 		break;
 	}
-	case 3:
+	case 3://Choi voi may (de) 
 	{
-		//Choi voi may	
+		m.showPtr();
 		system("cls");
 		_Game t(20, 10, 5);
 		t.startGame();
@@ -125,7 +124,7 @@ Label_main:
 								t.exitGame();
 							}
 							else  t.startGame();
-						}							
+						}
 						}
 					}
 				}
@@ -134,7 +133,7 @@ Label_main:
 			//Luot cua may 	
 			else
 			{
-				t.playWithAi();
+				t.playWithAi_Easy();
 				if (t.processCheckBoard())
 				{
 					switch (t.processFinish())
@@ -147,7 +146,7 @@ Label_main:
 							t.exitGame();
 						}
 						else  t.startGame();
-					}					
+					}
 					case 2: break;
 					}
 				}
@@ -156,14 +155,88 @@ Label_main:
 		}
 		goto Label_main;
 	}
-	case 4:
+	case 4://Choi voi may (kho)
+	
 	{
-		//Luat Choi
+		m.showPtr();
 		system("cls");
-		cout << "In luat choi\n";
-		system("pause");
-		break;
+		_Game t(20, 10, 5);
+		t.startGame();
+		bool isPlayer = 1;
+		while (t.isContinue())
+		{
+			//Luot cua nguoi choi
+			if (isPlayer)
+			{
+				t.waitKeyBoard();
+				if (t.getCommand() == 27)// Neu bang ESC thi luu game roi thoat
+				{
+					t.exitGame();
+				}
+				else
+				{
+					do {
+						switch (t.getCommand())
+						{
+						case 'A':
+							t.moveLeft();
+							break;
+						case 'W':
+							t.moveUp();
+							break;
+						case 'D':
+							t.moveRight();
+							break;
+						case 'S':
+							t.moveDown();
+							break;
+						}
+						t.waitKeyBoard();
+					} while (t.getCommand() != 13);
+					if (t.processCheckBoard())
+					{
+						switch (t.processFinish())
+						{
+						case -1: case 1: case 0:
+						{
+							system("pause");
+							if (t.askContinue() != 'Y')
+							{
+								t.exitGame();
+							}
+							else  t.startGame();
+						}
+						}
+					}
+				}
+				isPlayer = !isPlayer;
+			}
+			//Luot cua may 	
+			else
+			{
+				t.playWithAi_Hard();
+				if (t.processCheckBoard())
+				{
+					switch (t.processFinish())
+					{
+					case -1: case 1: case 0:
+					{
+						system("pause");
+						if (t.askContinue() != 'Y')
+						{
+							t.exitGame();
+						}
+						else  t.startGame();
+					}
+					case 2: break;
+					}
+				}
+				isPlayer = !isPlayer;
+			}
+		}
+		goto Label_main;
 	}
+	
 	case 5:
 	{
 		//Thoat Game

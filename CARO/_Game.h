@@ -33,8 +33,8 @@ public:
 	void loadGame();
 public:
 	//Choi voi may 
-	void playWithAi();
-	//int Minimax(int , int , int, bool , int , int);
-	//_Point* findTheBestMove();
+	void playWithAi_Hard();
+	void playWithAi_Easy();
+	
 
 };

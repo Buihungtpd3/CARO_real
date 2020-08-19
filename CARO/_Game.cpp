@@ -201,9 +201,18 @@ void _Game::moveUp() {
 //	}
 //}
 
-void _Game::playWithAi()
+void _Game::playWithAi_Hard()
 {
 	_Point result = _b->findTheBestMove_1();
+	_j = (result.getX() - _b->getLeft() - 2) / 4;
+	_i = (result.getY() - _b->getTop() - 1) / 2;
+	_x = result.getX();
+	_y = result.getY();
+	gotoXY(_x, _y);
+}
+void _Game::playWithAi_Easy()
+{
+	_Point result = _b->findTheBestMove_2();
 	_j = (result.getX() - _b->getLeft() - 2) / 4;
 	_i = (result.getY() - _b->getTop() - 1) / 2;
 	_x = result.getX();

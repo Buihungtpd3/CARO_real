@@ -25,4 +25,5 @@ void _Common::textColor(int x)
 	HANDLE color;
 	color = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(color, x);
+
 }
