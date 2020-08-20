@@ -28,23 +28,24 @@ public:
 	~_Board();
 public:
 	//Bacsic menthod
-	int getSize();
-	int getLeft();
-	int getTop();
-	int getXAt(int, int);
-	int getYAt(int, int);
-	void resetData();
-	void drawBoard();
+	int getSize(); // Kích thước bàn cờ
+	int getLeft();// Lề trái
+	int getTop(); // Lề phải
+	int getXAt(int, int); // Tọa độ x tại vị trí i, j trên bàn cờ
+	int getYAt(int, int);// Tọa độ y tại vị trí i, j trên bàn cờ
+	void resetData();// Đặt lại trạng thái các ô trên bàn cờ
+	void drawBoard();// Vẽ bàn cờ
 public:
-	int checkBoard(int, int, bool);
-	int testBoard(int,int,bool);
-	bool checkRow(int, int);
-	bool checkColum(int, int);
-	bool checkMainDioganal(int, int);
-	bool checkSubDioganal(int, int);
-	bool checkDraw();
-	int getCDraw();
-	_Point& getParr(int,int);
+	int checkBoard(int, int, bool);// Trả về kết quả thắng thua 
+	int testBoard(int,int,bool);// Kiểm tra thắng thua trái phải ngang dọc 
+	bool checkRow(int, int);// Kiểm tra trên hàng 
+	bool checkColum(int, int);// kiểm tra trên cột
+	bool checkMainDioganal(int, int);// Kiểm tra chéo chính
+	bool checkSubDioganal(int, int);// Kiểm tra chéo phụ
+	bool checkDraw();// Kiểm tra hòa hay không ?
+	
+	int getCDraw();// Tổng sô nước đi hiện tại 
+	_Point& getParr(int,int);// trả về bàn cờ
 public:
 	//Choi
 	_Point findTheBestMove_1(); // Tim nuoc di kho
