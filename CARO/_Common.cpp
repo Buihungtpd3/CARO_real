@@ -27,3 +27,15 @@ void _Common::textColor(int x)
 	SetConsoleTextAttribute(color, x);
 
 }
+void _Common::backGround(int left, int top, int wide, int height, int color)
+{
+	gotoXY(left, top);
+	textColor(color);
+	for (int i = left; i < wide + left; i++)
+		for (int j = top; j < height + top; j++)
+		{
+			gotoXY(i, j);
+			string a = " ";
+			cout << a;
+		}
+}

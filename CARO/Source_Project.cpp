@@ -9,6 +9,7 @@ using namespace std;
 
 int main() {
 Label_main:
+	system("color F1");
 	system("cls");
 	_Common::resizeConsole(1520, 1080);
 	_Common::fixConsoleWindow();
@@ -16,7 +17,9 @@ Label_main:
 	_Menu m;
 	m.displayMenu();
 	m.setChoice();
+	m.showPtr();
 	int userChosen = m.getChoice();
+	m.textColor(240);
 	switch (userChosen)
 	{		
 	case 1://Nguoi vs Nguoi
@@ -78,7 +81,7 @@ Label_main:
 	}
 	case 3://Choi voi may (de) 
 	{
-		m.showPtr();
+	
 		system("cls");
 		_Game t(20, 10, 5);
 		t.startGame();
@@ -159,7 +162,7 @@ Label_main:
 	case 4://Choi voi may (kho)
 	
 	{
-		m.showPtr();
+		
 		system("cls");
 		_Game t(20, 10, 5);
 		t.startGame();

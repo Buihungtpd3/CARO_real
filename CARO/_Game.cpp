@@ -49,12 +49,15 @@ bool _Game::processCheckBoard()
 	{									   //Neu turn = true rturn -1 (luot X), neu turn = false, return 1 (luot O)....
 	case -1: 
 	{
+		textColor(253);
 		cout << "X";	
+		textColor(240);
 	}
 		break;
 	case 1: 
-	{	
+	{	textColor(249);
 		cout << "O";
+		textColor(240);
 	}
 		break;
 	case 0: return false;
@@ -67,8 +70,16 @@ int _Game::processFinish() {
 	int whoWin = _b->testBoard(_i, _j, _turn);//Ham test board nhan vao vi tri cua moi o co, luot choi va tra ve ket 1 so tuong ung voi cac truong hop
 	switch (whoWin)
 	{
-		case -1: { cout << "\t\t\t\t\t\t\t\t\t\t\tPlayer 1 win"; break; }
-		case 1: {cout << "\t\t\t\t\t\t\t\t\t\t\t\tPlayer 2 win"; break; }
+		case -1: 
+		{ 
+			
+			break;
+		}
+		case 1: 
+		{
+			
+			break; 
+		}
 		case 0: {cout << "\t\t\t\t\t\t\t\t\t\t\t\tdraw"; break; }
 		case 2: _turn = !_turn;//Doi luot neu khong gi xay ra !
 	}
@@ -223,4 +234,27 @@ void _Game::loadGame()
 {
 	//chua cai dat
 }
-
+void _Game::veKhung()
+{
+	textColor(255);
+	for (int i = 0; i < 101; i++) {
+		for (int j = 0; j < 30; j++) {
+			gotoXY(i, j);
+			cout << " ";
+		}
+	}
+	int x = 60, y = 20;
+	//if (player 1 win) x = 1, else x = 2
+	textColor(192);
+	gotoXY(x, y); cout << "                                              ";
+	gotoXY(x, ++y); cout << "                                              ";
+	gotoXY(x, ++y); cout << "                                              ";
+	gotoXY(x, ++y); cout << "                                              ";
+	textColor(199);
+	gotoXY(x, ++y); cout << "          Do you want to play again?          ";
+	textColor(206);
+	gotoXY(x, ++y); cout << "                Yes         No                ";
+	textColor(192);
+	gotoXY(x, ++y); cout << "                                              ";
+	gotoXY(x, ++y); cout << "                                              ";
+}
