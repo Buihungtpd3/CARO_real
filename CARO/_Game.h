@@ -12,11 +12,11 @@ private:
 	int _command;
 	bool _loop;
 	int _i, _j;
-	int turnX, turnO;
 public:
 	_Game(int, int, int);
 	~_Game();
 public:
+	int turnX = 0, turnO = 0;
 	int getCommand();
 	bool isContinue();
 	char waitKeyBoard();
@@ -29,8 +29,10 @@ public:
 	void moveLeft();
 	void moveUp();
 	void moveDown();
-	void veKhung();
 	void loadGame();
+	void P1Win();
+	void P2Win();
+	void printTurn();
 public:
 	//Choi voi may 
 	void playWithAi_Hard();

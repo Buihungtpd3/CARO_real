@@ -39,3 +39,64 @@ void _Common::backGround(int left, int top, int wide, int height, int color)
 			cout << a;
 		}
 }
+void  _Common::cheoTrai(int left, int top, int dai, int cao, int color)
+{
+	textColor(color);
+	int h = 0;
+	for (int i = left; i <= dai + left; i++)
+	{
+		int k = 0;
+		for (int j = cao + top; j >= top; j--)
+		{
+			if (h == k)
+			{
+
+				gotoXY(i, j);
+				cout << "   ";
+			}
+			k++;
+		}
+		h++;
+	}
+
+
+}
+void  _Common::cheoPhai(int left, int top, int dai, int cao, int color)
+{
+	textColor(color);
+	int h = 0;
+	for (int i = left; i <= left + dai; i++)
+	{
+		int k = 0;
+		for (int j = top; j <= top + cao; j++)
+		{
+			if (h == k)
+			{
+
+				gotoXY(i, j);
+				cout << "   ";
+			}
+			k++;
+		}
+		h++;
+	}
+}
+void  _Common::veNgang(int left, int top, int dai, int color)
+{
+	textColor(color);
+	for (int i = left; i <= left + dai; i++)
+	{
+		gotoXY(i, top);
+		cout << "  ";
+	}
+}
+void  _Common::veDoc(int left, int top, int dai, int color)
+{
+	textColor(color);
+	for (int i = top; i <= top + dai; i++)
+	{
+
+		gotoXY(left, i);
+		cout << "   ";
+	}
+}

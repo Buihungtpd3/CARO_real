@@ -25,10 +25,35 @@ char _Game::waitKeyBoard() {
 }
 char _Game::askContinue() {
 	system("cls");
-	cout << "Do you want to continue? <Y/N> ";
-	char choice;
-	cin >> choice;
-	return choice;
+	char c = ' ';
+	while (c != 'y' && c != 'Y' && c != 27)
+	{
+		backGround(52, 16, 58, 10, 112);
+		backGround(50, 15, 58, 10, 192);
+
+		gotoXY(65, 17);
+		textColor(103);
+		cout << "DO YOU WANT PLAY AGIAN?";
+		textColor(199);
+		gotoXY(65, 19);
+		cout << "PRESS " << "Y" << " TO RESTART";
+		gotoXY(65, 20);
+		cout << "PRESS " << "ESC" << " TO QUIT";
+		gotoXY(65, 22);
+		cout << "ENTER YOUR CHOSE: ";
+		c = _getch();
+		gotoXY(84, 22);
+		textColor(192);
+		if (c != 'y' && c != 'Y' && c != 27)
+		{
+			gotoXY(66, 22);
+			cout << "EROR! TRY AGAIN: ";
+			gotoXY(65, 22);
+			cout << "ENTER YOUR CHOSE: ";
+		}
+	}
+	return c;
+
 }
 void _Game::startGame()
 {
@@ -37,6 +62,7 @@ void _Game::startGame()
 	_b->drawBoard();// Ve ban co
 	_x = _b->getXAt(0, 0);// Tra ve vi tri cua con tro tren man hinh theo truc hoanh
 	_y = _b->getYAt(0, 0);//Tra ve vi tri cua con tro tren man hinh theo truc tung
+	turnX = turnO = 0;
 }
 void _Game::exitGame()
 {
@@ -49,12 +75,14 @@ bool _Game::processCheckBoard()
 	{									   //Neu turn = true rturn -1 (luot X), neu turn = false, return 1 (luot O)....
 	case -1: 
 	{
+		turnX++;
 		textColor(253);
 		cout << "X";	
 		textColor(240);
 	}
 		break;
 	case 1: 
+		turnO++;
 	{	textColor(249);
 		cout << "O";
 		textColor(240);
@@ -64,6 +92,122 @@ bool _Game::processCheckBoard()
 	}
 	return true;
 }
+//Ham in ra X win 
+void _Game::P1Win()
+{
+	system("cls");
+	hidePtr();
+	int arr[4] = { 43,48,95,96};
+	int color;
+	int index = 0;
+	for (int i = 0; i < 20; i++)
+	{
+		Sleep(200);
+		index = 0 + rand() % (4);
+		color = arr[index];
+		// X
+
+		cheoPhai(45, 11, 10, 10, 112);
+		cheoTrai(45, 11, 10, 10, 112);
+		cheoTrai(40, 10, 10, 10, color);
+		cheoPhai(40, 10, 10, 10, color);
+		// W
+
+		cheoPhai(60, 11, 10, 10, 112);
+		cheoTrai(70, 16, 3, 3, 112);
+		cheoPhai(73, 16, 3, 3, 112);
+		cheoTrai(76, 11, 10, 10, 112);
+
+		cheoPhai(55, 10, 10, 10, color);
+		cheoTrai(65, 15, 3, 3, color);
+		cheoPhai(68, 15, 3, 3, color);
+		cheoTrai(71, 10, 10, 10, color);
+
+		// I
+
+		veNgang(91, 11, 10, 112);
+		veDoc(96, 11, 10, 112);
+		veNgang(91, 21, 10, 112);
+
+		veNgang(86, 10, 10, color);
+		veDoc(91, 10, 10, color);
+		veNgang(86, 20, 10, color);
+
+		//N
+
+		veDoc(107, 11, 10, 112);
+		cheoPhai(108, 11, 10, 10, 112);
+		veDoc(119, 11, 10, 112);
+
+		veDoc(102, 10, 10, color);
+		cheoPhai(103, 10, 10, 10, color);
+		veDoc(114, 10, 10, color);
+	}
+}
+void _Game::P2Win()
+{
+	system("cls");
+	hidePtr();
+	int arr[4] = { 43,48,95,96 };
+	int color;
+	int index = 0;
+	for (int i = 0; i < 20; i++)
+	{
+		Sleep(200);
+		index = 0 + rand() % (4);
+		color = arr[index];
+		// O
+		veDoc(42, 13, 7, 112);
+		veDoc(57, 13, 7, 112);
+		veNgang(48, 11, 4, 112);
+		veNgang(48, 22, 4, 112);
+		gotoXY(45, 12); cout << "   ";
+		gotoXY(54, 12); cout << "   ";
+		gotoXY(45, 21); cout << "   ";
+		gotoXY(54, 21); cout << "   ";
+
+		veDoc(38, 12, 7, color);
+		veDoc(53, 12, 7, color);
+		veNgang(44, 10, 4, color);
+		veNgang(44, 21, 4, color);
+		gotoXY(41, 11); cout << "   ";
+		gotoXY(50, 11); cout << "   ";
+		gotoXY(41, 20); cout << "   ";
+		gotoXY(50, 20); cout << "   ";
+
+		// W
+
+		cheoPhai(60, 11, 10, 10, 112);
+		cheoTrai(70, 16, 3, 3, 112);
+		cheoPhai(73, 16, 3, 3, 112);
+		cheoTrai(76, 11, 10, 10, 112);
+
+		cheoPhai(55, 10, 10, 10, color);
+		cheoTrai(65, 15, 3, 3, color);
+		cheoPhai(68, 15, 3, 3, color);
+		cheoTrai(71, 10, 10, 10, color);
+
+		// I
+
+		veNgang(91, 11, 10, 112);
+		veDoc(96, 11, 10, 112);
+		veNgang(91, 21, 10, 112);
+
+		veNgang(86, 10, 10, color);
+		veDoc(91, 10, 10, color);
+		veNgang(86, 20, 10, color);
+
+		//N
+
+		veDoc(107, 11, 10, 112);
+		cheoPhai(108, 11, 10, 10, 112);
+		veDoc(119, 11, 10, 112);
+
+		veDoc(102, 10, 10, color);
+		cheoPhai(103, 10, 10, 10, color);
+		veDoc(114, 10, 10, color);
+	}
+}
 int _Game::processFinish() {
 
 	_Common::gotoXY(0, _b->getYAt(_b->getSize() - 1, _b->getSize() - 1) + 2);
@@ -72,12 +216,12 @@ int _Game::processFinish() {
 	{
 		case -1: 
 		{ 
-			
+			P1Win();
 			break;
 		}
 		case 1: 
 		{
-			
+			P2Win();
 			break; 
 		}
 		case 0: {cout << "\t\t\t\t\t\t\t\t\t\t\t\tdraw"; break; }
@@ -234,27 +378,17 @@ void _Game::loadGame()
 {
 	//chua cai dat
 }
-void _Game::veKhung()
+void _Game::printTurn()
 {
-	textColor(255);
-	for (int i = 0; i < 101; i++) {
-		for (int j = 0; j < 30; j++) {
-			gotoXY(i, j);
-			cout << " ";
-		}
-	}
-	int x = 60, y = 20;
-	//if (player 1 win) x = 1, else x = 2
-	textColor(192);
-	gotoXY(x, y); cout << "                                              ";
-	gotoXY(x, ++y); cout << "                                              ";
-	gotoXY(x, ++y); cout << "                                              ";
-	gotoXY(x, ++y); cout << "                                              ";
-	textColor(199);
-	gotoXY(x, ++y); cout << "          Do you want to play again?          ";
-	textColor(206);
-	gotoXY(x, ++y); cout << "                Yes         No                ";
-	textColor(192);
-	gotoXY(x, ++y); cout << "                                              ";
-	gotoXY(x, ++y); cout << "                                              ";
+	int x = _x;
+	int y = _y;
+	gotoXY(_b->getLeft() + _b->getSize() * 4 + 35, _b->getTop()+ 14);
+	textColor(252);
+	cout << turnX;
+	gotoXY(_b->getLeft() + _b->getSize() * 4 + 53,_b ->getTop() + 14);
+	textColor(252);
+	cout << turnO;
+	textColor(240);
+	_x = x; _y = y;
+	gotoXY(x, y);
 }

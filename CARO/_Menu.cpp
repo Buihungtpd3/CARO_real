@@ -75,10 +75,9 @@ void _Menu::print()
 		gotoXY(x, ++y); cout << "     ~~~~~~~~  ";
 		x = X-55; y = Y -5;
 		Sleep(50);
-
+		showPtr();
 		if (_kbhit())
 		{
-			showPtr();
 			textColor(mau);
 
 			if (_getch() == 13) return;

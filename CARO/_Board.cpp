@@ -86,7 +86,7 @@ void _Board::drawBoard() {
 	drawUpLine(_left + _size * 4 + 20, _top + 6 * 2 +10, (char)200, (char)188, (char)205, 10);//Ve vien duoi
 	drawSlideLine(_left+_size*4+20, _top+10, (char)186, 6);//Ve vien ben trai
 	//In cai bang
-	_Common::textColor(9);
+	_Common::textColor(240);
 	gotoXY(_left + _size * 4 + 30, _top + 12);
 	cout << "PLAYER 1";
 	gotoXY(_left + _size * 4 + 48, _top + 12);
