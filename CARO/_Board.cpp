@@ -1063,3 +1063,51 @@ _Point _Board::findTheBestMove_2()
 	curentCell.setY(_top + row * 2 + 1);
 	return curentCell;
 }
+void _Board:: loadData(int i, int j, int k)
+{
+	if (_size == 0) return;
+	_pArr[i][j].setX(4 * j + _left + 2);
+	_pArr[i][j].setY(2 * i + _top + 1);
+	_pArr[i][j].setCheck(k);
+	if (k == -1)
+	{
+		textColor(249);//X
+		_Common::gotoXY(4 * j + _left + 2, 2 * i + _top + 1);
+		cout << "X";
+		textColor(240);
+	}
+	if (k == 1)
+	{
+		textColor(249);	//O
+		_Common::gotoXY(4 * j + _left + 2, 2 * i + _top + 1);
+		cout << "O";
+		textColor(240);
+		
+	}
+}
+
+void _Board::setCheck(int i, int j, int val)
+{
+	if (_size == 0) return;
+	_pArr[i][j].setX(4 * j + _left + 2);
+	_pArr[i][j].setY(2 * i + _top + 1);
+	_pArr[i][j].setCheck(val);
+	if (val == -1)
+	{
+			//X
+		_Common::gotoXY(4 * j + _left + 2, 2 * i + _top + 1);
+		textColor(253);
+		cout << "X";
+		textColor(240);
+	}
+	if (val == 1)
+	{
+		    //O
+		_Common::gotoXY(4 * j + _left + 2, 2 * i + _top + 1);
+		textColor(249);
+		cout << "O";
+		textColor(240);
+	}
+	
+
+}

@@ -42,6 +42,7 @@ void _Menu::displayMenu()
 
 void _Menu::print()
 {
+	char key;
 	hidePtr();
 	textColor(244);
 	int mau = 4;
@@ -74,15 +75,16 @@ void _Menu::print()
 		gotoXY(x, ++y); cout << "   \\_`::::::::`/``~~     ";
 		gotoXY(x, ++y); cout << "     ~~~~~~~~  ";
 		x = X-55; y = Y -5;
-		Sleep(50);
+		Sleep(150);
 		showPtr();
 		if (_kbhit())
 		{
+			key = _getch();
 			textColor(mau);
 
-			if (_getch() == 13) return;
+			if (key == 13) return;
 
-			switch (_getch())
+			switch (key)
 			{
 			case 119:
 			{

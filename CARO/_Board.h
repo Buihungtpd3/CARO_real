@@ -36,6 +36,7 @@ public:
 	void resetData();// Đặt lại trạng thái các ô trên bàn cờ
 	void drawBoard();// Vẽ bàn cờ
 public:
+	void loadData(int i, int j, int k);
 	int checkBoard(int, int, bool);// Trả về kết quả thắng thua 
 	int testBoard(int,int,bool);// Kiểm tra thắng thua trái phải ngang dọc 
 	bool checkRow(int, int);// Kiểm tra trên hàng 
@@ -43,7 +44,8 @@ public:
 	bool checkMainDioganal(int, int);// Kiểm tra chéo chính
 	bool checkSubDioganal(int, int);// Kiểm tra chéo phụ
 	bool checkDraw();// Kiểm tra hòa hay không ?
-	
+	int get_Check(int i, int j) { return _pArr[i][j].getCheck(); }
+	void setCheck(int i, int j, int val);
 	int getCDraw();// Tổng sô nước đi hiện tại 
 	_Point& getParr(int,int);// trả về bàn cờ
 public:

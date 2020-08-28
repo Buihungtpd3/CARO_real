@@ -6,11 +6,9 @@
 #include <iostream>
 #include<conio.h>
 using namespace std;
-void PvsP()
+void PvsP(_Game& t)
 {
-	system("cls");
-	_Game t(20, 10, 5);
-	t.startGame();
+	t.setCh(1);
 	t.printTurn();
 	while (t.isContinue()) {
 		t.printTurn();
@@ -50,11 +48,17 @@ void PvsP()
 				switch (t.processFinish())
 					{
 				case -1: case 1: case 0:
-					if (t.askContinue() != 'Y')
+					if (t.askContinue() == 'Y' || t.askContinue() == 'y')
 					{
+						_Common::textColor(240);
 						t.startGame();
+						return PvsP(t);					
 					}
-					else t.exitGame();
+					else
+					{
+						t.exitGame();
+						return;
+					}
 					}
 				}
 				break;
@@ -62,8 +66,8 @@ void PvsP()
 			case 'L':
 			{
 				system("cls");
-				cout << "Goi ham luu game";
-				break;
+				t.saveGame();
+				return;
 			}
 			case 'T':
 			{
@@ -72,20 +76,15 @@ void PvsP()
 				break;
 			}
 
-
-
-
-
 			}
 		}
 	}
 	return;
 }
-void PvsE_EZ()
+void PvsE_EZ(_Game& t)
 {
-	system("cls");
-	_Game t(20, 10, 5);
-	t.startGame();
+	PVE:
+	t.setCh(3);
 	bool isPlayer = 1;
 	t.printTurn();
 	while (t.isContinue())
@@ -119,8 +118,8 @@ void PvsE_EZ()
 					case 'L':
 					{
 						system("cls");
-						cout << "Goi ham luu game";
-						break;
+						t.saveGame();
+						return;
 					}
 					case 'T':
 					{
@@ -138,12 +137,18 @@ void PvsE_EZ()
 					{
 					case -1: case 1: case 0:
 					{
-						system("pause");
-						if (t.askContinue() != 'Y')
+						
+						if (t.askContinue() == 'Y')
 						{
+							_Common::textColor(240);
 							t.startGame();
+							//return PvsE_EZ(t);
 						}
-						else t.exitGame();
+						else
+						{
+							t.exitGame();
+							return;
+						}
 					}
 					}
 				}
@@ -160,12 +165,16 @@ void PvsE_EZ()
 				{
 				case -1: case 1: case 0:
 				{
-					system("pause");
-					if (t.askContinue() != 'Y')
+					if (t.askContinue() == 'Y')
 					{
+						_Common::textColor(240);
 						t.startGame();
+						return PvsE_EZ(t);
 					}
-					else  t.exitGame();
+					else {
+						t.exitGame();
+						return;
+					}
 				}
 				}
 			}
@@ -173,11 +182,10 @@ void PvsE_EZ()
 		}
 	}
 }
-void PvsE_H()
+void PvsE_H(_Game&t)
 {
-	system("cls");
-	_Game t(20, 10, 5);
-	t.startGame();
+	
+	t.setCh(4);
 	bool isPlayer = 1;
 	t.printTurn();
 	while (t.isContinue())
@@ -211,8 +219,8 @@ void PvsE_H()
 					case 'L':
 					{
 						system("cls");
-						cout << "Goi ham luu game";
-						break;
+						t.saveGame();
+						return;
 					}
 					case 'T':
 					{
@@ -229,12 +237,17 @@ void PvsE_H()
 					{
 					case -1: case 1: case 0:
 					{
-						system("pause");
 						if (t.askContinue() != 'Y')
 						{
+							_Common::textColor(240);
 							t.startGame();
+							return PvsE_H(t);
 						}
-						else t.exitGame();
+						else
+						{
+							t.exitGame();
+							return;
+						}
 					}
 					}
 				}
@@ -251,18 +264,45 @@ void PvsE_H()
 				{
 				case -1: case 1: case 0:
 				{
-					system("pause");
 					if (t.askContinue() != 'Y')
 					{
+						_Common::textColor(240);
 						t.startGame();
+						return PvsE_H(t);
 					}
-					else  t.exitGame();
+					else {
+						
+						t.exitGame();
+						return;
+					}
 				}
 				case 2: break;
 				}
 			}
 			isPlayer = !isPlayer;
 		}
+	}
+}
+void LoadGame(_Game& t)
+{
+	string nameGame = t.loadFileName();
+	t.startGame();
+	t.loadGame(nameGame);
+	int option = t.getCh();
+	switch (option)
+	{
+	case 1: {
+		PvsP(t);
+		break;
+	}
+	case 3: {
+		PvsE_EZ(t);
+		break;
+	}
+	case 4: {
+		PvsE_H(t);
+		break;
+	}
 	}
 }
 int main() {
@@ -279,34 +319,34 @@ Label_main:
 	m.showPtr();
 	int userChosen = m.getChoice();
 	m.textColor(240);
-
+	_Game t(20, 10, 5);
 	// Cac che do 
 	switch (userChosen)
 	{		
 	case 1://Nguoi vs Nguoi
 	{
-		PvsP();
+		t.startGame();
+		PvsP(t);
 		goto Label_main;
-		return 0;
+		break;
 	}
 	case 2:
 	{
 		//Load Game
 		system("cls");
-		cout << "Ham Load game    \n";
-		cout << "12345";
-		system("pause");
+		LoadGame(t);
 		break;
 	}
 	case 3://Choi voi may (de) 
 	{
-	
-		PvsE_EZ();
+		t.startGame();
+		PvsE_EZ(t);
 		goto Label_main;
 	}
 	case 4://Choi voi may (kho)	
-	{		
-		PvsE_H();
+	{	
+		t.startGame();
+		PvsE_H(t);
 		goto Label_main;
 	}
 	

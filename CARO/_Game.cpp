@@ -8,6 +8,7 @@ _Game::_Game (int pSize, int pLeft, int pTop) {
 	_y = pTop;
 	_i = _j = 0; // i hang va j cot tren ban co 
 	turnX = turnO = 0;
+	option = 1;
 }
 _Game::~_Game() {
 	delete _b;
@@ -41,7 +42,7 @@ char _Game::askContinue() {
 		cout << "PRESS " << "ESC" << " TO QUIT";
 		gotoXY(65, 22);
 		cout << "ENTER YOUR CHOSE: ";
-		c = _getch();
+		cin >> c;
 		gotoXY(84, 22);
 		textColor(192);
 		if (c != 'y' && c != 'Y' && c != 27)
@@ -50,6 +51,18 @@ char _Game::askContinue() {
 			cout << "EROR! TRY AGAIN: ";
 			gotoXY(65, 22);
 			cout << "ENTER YOUR CHOSE: ";
+		}
+	}
+	while (1)
+	{
+		if (_kbhit())
+		{
+			switch (_getch())
+			{
+			case 13:
+				return c;
+				break;
+			}
 		}
 	}
 	return c;
@@ -62,6 +75,8 @@ void _Game::startGame()
 	_b->drawBoard();// Ve ban co
 	_x = _b->getXAt(0, 0);// Tra ve vi tri cua con tro tren man hinh theo truc hoanh
 	_y = _b->getYAt(0, 0);//Tra ve vi tri cua con tro tren man hinh theo truc tung
+	_turn = true;
+	_i = _j = 0;
 	turnX = turnO = 0;
 }
 void _Game::exitGame()
@@ -76,14 +91,42 @@ bool _Game::processCheckBoard()
 	case -1: 
 	{
 		turnX++;
+		_Common::backGround(110, 30, 40, 15, 240);
+		// ket thuc luot X thong bao bat dau O	
+		veDoc(135 - 5, 34, 7, 112);
+		veDoc(150 - 5, 34, 7, 112);
+		veNgang(141 - 5, 32, 4, 112);
+		veNgang(141 - 5, 43, 4, 112);
+		gotoXY(138 - 5, 33); cout << "   ";
+		gotoXY(147 - 5, 33); cout << "   ";
+		gotoXY(138 - 5, 42); cout << "   ";
+		gotoXY(147 - 5, 42); cout << "   ";
+
+		veDoc(130 - 5, 33, 7, 96);
+		veDoc(145 - 5, 33, 7, 96);
+		veNgang(136 - 5, 31, 4, 96);
+		veNgang(136 - 5, 42, 4, 96);
+		gotoXY(133 - 5, 32); cout << "   ";
+		gotoXY(142 - 5, 32); cout << "   ";
+		gotoXY(133 - 5, 41); cout << "   ";
+		gotoXY(142 - 5, 41); cout << "   ";
+		gotoXY(_x, _y);
 		textColor(253);
 		cout << "X";	
 		textColor(240);
 	}
 		break;
-	case 1: 
+	case 1: 	
+	{
 		turnO++;
-	{	textColor(249);
+		// ket thuc luot O thong bao bat dau X
+		_Common::backGround(120, 30, 40, 15, 240);
+		cheoPhai(130, 33, 10, 10, 112);
+		cheoTrai(130, 33, 10, 10, 112);
+		cheoTrai(125, 32, 10, 10, 96);
+		cheoPhai(125, 32, 10, 10, 96);
+		textColor(249);
+		gotoXY(_x, _y);
 		cout << "O";
 		textColor(240);
 	}
@@ -143,6 +186,8 @@ void _Game::P1Win()
 		cheoPhai(103, 10, 10, 10, color);
 		veDoc(114, 10, 10, color);
 	}
+	textColor(240);
+	showPtr();
 }
 void _Game::P2Win()
 {
@@ -207,6 +252,8 @@ void _Game::P2Win()
 		cheoPhai(103, 10, 10, 10, color);
 		veDoc(114, 10, 10, color);
 	}
+	textColor(240);
+	showPtr();
 }
 int _Game::processFinish() {
 
@@ -355,7 +402,14 @@ void _Game::moveUp() {
 //		return best;
 //	}
 //}
-
+void _Game::setCh(int n)
+{
+	option = n;
+}
+int _Game::getCh()
+{
+	return option;
+}
 void _Game::playWithAi_Hard()
 {
 	_Point result = _b->findTheBestMove_1();
@@ -374,9 +428,89 @@ void _Game::playWithAi_Easy()
 	_y = result.getY();
 	gotoXY(_x, _y);
 }
-void _Game::loadGame()
+string _Game::loadFileName()
 {
-	//chua cai dat
+	fstream input;
+	set <string> fileName;
+	textColor(240);
+	input.open("Name.txt", ios::in);
+	int i = 16;
+	string nameFile;
+
+
+	while (!input.eof())
+	{
+		input >> nameFile;
+		fileName.insert(nameFile);
+	}
+
+
+	bool flag = true;
+	while (flag != false)
+	{
+		system("cls");
+		gotoXY(64, 16);
+		textColor(176);
+		cout << "LIST FILE:";
+		textColor(240);
+		set <string> ::iterator itr;
+		for (itr = fileName.begin(); itr != fileName.end(); ++itr)
+		{
+			gotoXY(75, i);
+			textColor(248);
+			cout << *itr;
+			textColor(240);
+			i++;
+		}
+
+		input.close();
+		gotoXY(64, 30);
+		textColor(240);
+		cout << "ENTER YOUR FILE:";
+		getline(cin, nameFile);
+		set <string> ::iterator it;
+		it = fileName.find(nameFile);
+		if (it != fileName.end())
+		{
+			return nameFile;
+			flag = false;		
+		}
+		else
+		{
+			gotoXY(75, 32);
+			textColor(100);
+			cout << "NOT FOUND";
+			char key = _getch();
+			textColor(240);
+		}
+	}
+}
+void _Game::loadGame(string name)
+{
+	// Doc file 
+	fstream f;
+	int status;
+	f.open(name, ios::in);
+	if (!f)
+	{
+		// cout nay kia kia no
+	}
+	else
+	{
+		f >> turnX >> turnO >> option >> _turn;
+		for (int i = 0; i < _b->getSize(); i++)
+			for (int j = 0; j < _b->getSize(); j++)
+			{
+				f >> status;
+				_b->setCheck(i, j, status);			
+			}
+		_x = _b->getXAt(0, 0);
+		_y = _b->getYAt(0, 0);
+		_b->drawBoard();
+		f.close();
+	}
+
+	f.close();
 }
 void _Game::printTurn()
 {
@@ -391,4 +525,92 @@ void _Game::printTurn()
 	textColor(240);
 	_x = x; _y = y;
 	gotoXY(x, y);
+}
+
+void _Game::saveGame()
+{
+	string data;
+	string temp;
+	fstream input;
+	ofstream f1;
+	ofstream f2;
+	input.open("Name.txt", ios::in);
+	while (!input.eof())
+	{
+		input >> temp;
+		_Game::fileName.insert(temp);
+	}
+	input.close();
+	bool flag = true;
+	do
+	{
+		system("cls");
+		backGround(65, 14, 50, 10, 112);
+		backGround(60, 13, 50, 10, 192);
+		
+		textColor(192);
+		gotoXY(65, 15);
+		cout << "ENTER FILE NAME: ";
+		textColor(203);
+		getline(cin, data);
+
+		set <string> ::iterator it;
+		it = fileName.find(data);
+		if (it != fileName.end())
+		{
+			textColor(100);
+			gotoXY(65, 19);
+			hidePtr();
+			cout << "    FILE NAME HAVE EXITED! TRY AGAIN    ";
+			char key = _getch();
+			textColor(240);
+		}
+		else
+		{
+			textColor(100);
+			gotoXY(80, 19);
+			cout << "   DONE!!   ";
+			textColor(240);
+			flag = false;
+		}
+	} while (flag == true);
+
+
+	f1.open(data, ios::out);
+	f2.open("Name.txt", ios::app);
+	f2 << data << " " << endl;
+	//thong tin
+	f1 << turnX << " " << turnO << " " <<  option << " " << _turn << endl;
+	for (int i = 0; i < _b->getSize(); i++)
+	{
+		for (int j = 0; j < _b->getSize(); j++)
+		{
+			f1 << _b->get_Check(i, j) << " ";
+		}
+		f1 << endl;
+	}
+	f1.close();
+	f2.close();
+	_Common::gotoXY(78, 21);
+	textColor(192);
+	cout << "ESC : BACK";
+	textColor(240);
+	int t = 1;
+	while (t)
+	{
+		if (_kbhit())
+		{
+			switch (_getch())
+			{
+			case 27:
+				return;
+				break;
+			}
+		}
+	}
+}
+
+int _Game::getTurn()
+{
+	return _turn;
 }

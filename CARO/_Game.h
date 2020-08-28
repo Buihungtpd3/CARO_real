@@ -1,9 +1,12 @@
 #include "_Board.h"
 #include "_Common.h"
 #include "_Point.h"
+#include "_Menu.h"
 #include <stdlib.h>
 #include <time.h>
-#include <map>
+#include <fstream>
+#include <string>
+#include <set>
 class _Game : public _Board {
 private:
 	_Board* _b;
@@ -12,12 +15,17 @@ private:
 	int _command;
 	bool _loop;
 	int _i, _j;
+	int option;
+	set <string> fileName;
 public:
 	_Game(int, int, int);
 	~_Game();
 public:
 	int turnX = 0, turnO = 0;
+	int getTurn();
 	int getCommand();
+	void setCh(int);
+	int getCh();
 	bool isContinue();
 	char waitKeyBoard();
 	char askContinue();
@@ -29,7 +37,9 @@ public:
 	void moveLeft();
 	void moveUp();
 	void moveDown();
-	void loadGame();
+	void saveGame();
+	void loadGame(string name);
+	string loadFileName();
 	void P1Win();
 	void P2Win();
 	void printTurn();
