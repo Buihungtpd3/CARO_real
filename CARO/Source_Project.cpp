@@ -43,6 +43,7 @@ void PvsP(_Game& t)
 			}
 			case 13:
 			{
+				PlaySound(TEXT("tick.wav"), NULL, SND_FILENAME | SND_ASYNC);
 				if (t.processCheckBoard())
 				{
 				switch (t.processFinish())
@@ -83,7 +84,7 @@ void PvsP(_Game& t)
 }
 void PvsE_EZ(_Game& t)
 {
-	PVE:
+	
 	t.setCh(3);
 	bool isPlayer = 1;
 	t.printTurn();

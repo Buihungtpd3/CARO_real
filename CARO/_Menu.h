@@ -4,6 +4,7 @@
 #include <conio.h>
 #include <stdlib.h>
 #include "_Common.h"
+
 using namespace std;
 
 class _Menu : public _Common{

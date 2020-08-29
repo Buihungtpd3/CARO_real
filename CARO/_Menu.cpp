@@ -1,8 +1,11 @@
 #include "_Menu.h"
-
+#include <mmsystem.h>
+#include <iostream>
+#include <Windows.h>
 //Nhap su lua chon
 void _Menu::setChoice()
 {
+	PlaySound(TEXT("tick.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	int X = 100; int Y = 23;
 	if (_x == X && _y == Y)
 		_choice = 1;
@@ -56,6 +59,7 @@ void _Menu::print()
 	_x = X;
 	_y = Y;
 	gotoXY(_x, _y);
+	PlaySound(TEXT("intro2.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	while (true)
 	{
 		int color = 1 + rand() % (15 + 1 - 1);
@@ -89,7 +93,7 @@ void _Menu::print()
 			case 119:
 			{
 				//chen am thanh 
-				//...
+				PlaySound(TEXT("move.wav"), NULL, SND_FILENAME | SND_ASYNC);
 				if (_y >= 23 && _y <= 28) {
 					_y--; gotoXY(_x, _y);
 				}
@@ -136,7 +140,7 @@ void _Menu::print()
 			case 115:
 			{
 				//chen am thanh 
-				//...
+				PlaySound(TEXT("move.wav"), NULL, SND_FILENAME | SND_ASYNC);
 				if (_y >= 23 && _y <= 28) {
 					_y++; gotoXY(_x, _y);
 				}
@@ -185,8 +189,9 @@ void _Menu::print()
 			}
 			if (_y < 23 || _y > 28)
 			{
-				_x = X ; _y = Y;
+				_x = 100 ; _y = 23;
 				gotoXY(_x, _y);
+				printOptions(_x, _y, (char)175);
 			}
 		}
 	}

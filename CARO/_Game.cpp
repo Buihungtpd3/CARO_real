@@ -143,7 +143,7 @@ void _Game::P1Win()
 	int arr[4] = { 43,48,95,96};
 	int color;
 	int index = 0;
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 28; i++)
 	{
 		Sleep(200);
 		index = 0 + rand() % (4);
@@ -196,7 +196,7 @@ void _Game::P2Win()
 	int arr[4] = { 43,48,95,96 };
 	int color;
 	int index = 0;
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 28; i++)
 	{
 		Sleep(200);
 		index = 0 + rand() % (4);
@@ -263,11 +263,13 @@ int _Game::processFinish() {
 	{
 		case -1: 
 		{ 
+			PlaySound(TEXT("win.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			P1Win();
 			break;
 		}
 		case 1: 
 		{
+			PlaySound(TEXT("win.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			P2Win();
 			break; 
 		}
@@ -278,6 +280,7 @@ int _Game::processFinish() {
 	return whoWin;
 }
 void _Game::moveRight() {
+	PlaySound(TEXT("move.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	if (_x < _b->getXAt(_b->getSize() - 1, _b->getSize() - 1)) {
 		_x += 4;
 		_j++;
@@ -285,6 +288,7 @@ void _Game::moveRight() {
 	}
 }
 void _Game::moveLeft() {
+	PlaySound(TEXT("move.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	if (_x > _b->getXAt(0, 0)) {
 		_x -= 4;
 		_j--;
@@ -292,6 +296,7 @@ void _Game::moveLeft() {
 	}
 }
 void _Game::moveDown() {
+	PlaySound(TEXT("move.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	if (_y < _b->getYAt(_b->getSize() - 1, _b->getSize() - 1)) {
 		_y += 2;
 		_i++;
@@ -299,6 +304,7 @@ void _Game::moveDown() {
 	}
 }
 void _Game::moveUp() {
+	PlaySound(TEXT("move.wav"), NULL, SND_FILENAME | SND_ASYNC);
 	if (_y > _b->getYAt(0, 0)) {
 		_y -= 2;
 		_i--;
@@ -484,6 +490,7 @@ string _Game::loadFileName()
 			textColor(240);
 		}
 	}
+	return "";
 }
 void _Game::loadGame(string name)
 {
