@@ -139,7 +139,7 @@ void PvsE_EZ(_Game& t)
 					case -1: case 1: case 0:
 					{
 						
-						if (t.askContinue() == 'Y')
+						if (t.askContinue())
 						{
 							_Common::textColor(240);
 							t.startGame();

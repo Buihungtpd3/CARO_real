@@ -25,48 +25,51 @@ char _Game::waitKeyBoard() {
 	return _command;
 }
 char _Game::askContinue() {
+	hidePtr();
 	system("cls");
-	char c = ' ';
-	while (c != 'y' && c != 'Y' && c != 27)
-	{
-		backGround(52, 16, 58, 10, 112);
-		backGround(50, 15, 58, 10, 192);
+	int k = 1;
+	backGround(52, 16, 58, 10, 112);
+	backGround(50, 15, 58, 10, 192);
+	gotoXY(65, 17);
+	textColor(224);
+	cout << " DO YOU WANT TO PLAY AGIAN? ";
+	textColor(199);
+	gotoXY(70, 20);
+	cout << " YES ";
+	gotoXY(81, 20);
+	cout << " NO ";
+	gotoXY(70, 20);
 
-		gotoXY(65, 17);
-		textColor(103);
-		cout << "DO YOU WANT PLAY AGIAN?";
-		textColor(199);
-		gotoXY(65, 19);
-		cout << "PRESS " << "Y" << " TO RESTART";
-		gotoXY(65, 20);
-		cout << "PRESS " << "ESC" << " TO QUIT";
-		gotoXY(65, 22);
-		cout << "ENTER YOUR CHOSE: ";
-		cin >> c;
-		gotoXY(84, 22);
-		textColor(192);
-		if (c != 'y' && c != 'Y' && c != 27)
-		{
-			gotoXY(66, 22);
-			cout << "EROR! TRY AGAIN: ";
-			gotoXY(65, 22);
-			cout << "ENTER YOUR CHOSE: ";
+int	c =0;
+	while (c !=13)
+	{
+		c = _getch();
+		if (char(c) == 'd' && k == 1) {
+			PlaySound(TEXT("move.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			textColor(199);
+			gotoXY(70, 20);
+			cout << " YES ";
+			textColor(224);
+			gotoXY(81, 20);
+			cout << " NO ";
+			k = 0;
+			textColor(199);
+		}
+		if (char(c)=='a' && k == 0) {
+			PlaySound(TEXT("move.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			textColor(199);
+			gotoXY(81, 20);
+			cout << " NO ";
+			gotoXY(70, 20);
+			textColor(224);
+			cout << " YES ";
+			k = 1;
+			textColor(199);
 		}
 	}
-	while (1)
-	{
-		if (_kbhit())
-		{
-			switch (_getch())
-			{
-			case 13:
-				return c;
-				break;
-			}
-		}
-	}
-	return c;
-
+	if (k == 1) return true;
+	else return false;
+	showPtr();
 }
 void _Game::startGame()
 {
@@ -255,6 +258,20 @@ void _Game::P2Win()
 	textColor(240);
 	showPtr();
 }
+void _Game::Draw()
+{
+	system("cls");
+	backGround(52, 16, 58, 10, 112);
+	backGround(50, 15, 58, 10, 192);
+	gotoXY(70, 20);
+	textColor(224);
+	cout << " DRAW ";
+	if (_kbhit())
+	{
+		char key = _getch();
+		return;
+	}
+}
 int _Game::processFinish() {
 
 	_Common::gotoXY(0, _b->getYAt(_b->getSize() - 1, _b->getSize() - 1) + 2);
@@ -273,7 +290,10 @@ int _Game::processFinish() {
 			P2Win();
 			break; 
 		}
-		case 0: {cout << "\t\t\t\t\t\t\t\t\t\t\t\tdraw"; break; }
+		case 0: {
+			Draw();
+			break;
+		}
 		case 2: _turn = !_turn;//Doi luot neu khong gi xay ra !
 	}
 	_Common::gotoXY(_x, _y);

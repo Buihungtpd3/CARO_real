@@ -42,6 +42,7 @@ public:
 	string loadFileName();
 	void P1Win();
 	void P2Win();
+	void Draw();
 	void printTurn();
 public:
 	//Choi voi may 
