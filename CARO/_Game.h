@@ -37,6 +37,8 @@ public:
 	void moveLeft();
 	void moveUp();
 	void moveDown();
+public:
+	void rule();
 	void saveGame();
 	void loadGame(string name);
 	string loadFileName();

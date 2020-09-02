@@ -641,3 +641,41 @@ int _Game::getTurn()
 {
 	return _turn;
 }
+
+void _Game::rule() {
+	system("cls");
+	
+	hidePtr();
+	textColor(240);
+	resizeConsole(1520, 1080);
+	fixConsoleWindow();
+	backGround(54, 16, 100, 20, 112);
+	backGround(50, 15, 100, 20, 192);
+	gotoXY(90, 17);
+	textColor(224);
+	cout << "     RULE     ";
+	textColor(199);
+	gotoXY(55, 19);
+	cout << ">> Board size 20x20";
+	gotoXY(55, 20);
+	cout << ">> Get 5 chess to win ";
+	gotoXY(55, 21);
+	cout << ">> If the first and the last chess is blocked out by enemy chess still not win. ";
+	gotoXY(55, 22);
+	cout << ">> Use W, A, D, S to move ";
+	gotoXY(55, 23);
+	cout << ">> HAVE FUN ^ ^ ";
+
+	gotoXY(90, 25);
+	textColor(224);
+	cout << " >> BACK ";
+	cin.ignore();
+	if (_kbhit())
+	{
+		char key = _getch();
+	}
+
+	textColor(240);
+	showPtr();
+	return;
+}

@@ -353,7 +353,8 @@ Label_main:
 	
 	case 5:
 	{
-		return 0;
+		t.rule();
+		goto Label_main;
 		break;
 	}
 	}
