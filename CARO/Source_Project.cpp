@@ -86,13 +86,12 @@ void PvsE_EZ(_Game& t)
 {
 	
 	t.setCh(3);
-	bool isPlayer = 1;
 	t.printTurn();
 	while (t.isContinue())
 	{
 		t.printTurn();
 		//Luot cua nguoi choi
-		if (isPlayer)
+		if (t.getTurn())
 		{
 			t.waitKeyBoard();
 			if (t.getCommand() == 27)// Neu bang ESC thi luu game roi thoat
@@ -153,8 +152,7 @@ void PvsE_EZ(_Game& t)
 					}
 					}
 				}
-			}
-			isPlayer = !isPlayer;
+			}			
 		}
 		//Luot cua may 	
 		else
@@ -179,7 +177,6 @@ void PvsE_EZ(_Game& t)
 				}
 				}
 			}
-			isPlayer = !isPlayer;
 		}
 	}
 }
@@ -187,13 +184,12 @@ void PvsE_H(_Game&t)
 {
 	
 	t.setCh(4);
-	bool isPlayer = 1;
 	t.printTurn();
 	while (t.isContinue())
 	{
 		t.printTurn();
 		//Luot cua nguoi choi
-		if (isPlayer)
+		if (t.getTurn())
 		{
 			t.waitKeyBoard();
 			if (t.getCommand() == 27)// Neu bang ESC thi luu game roi thoat
@@ -253,7 +249,7 @@ void PvsE_H(_Game&t)
 					}
 				}
 			}
-			isPlayer = !isPlayer;
+			
 		}
 		//Luot cua may 	
 		else
@@ -280,7 +276,7 @@ void PvsE_H(_Game&t)
 				case 2: break;
 				}
 			}
-			isPlayer = !isPlayer;
+			
 		}
 	}
 }
@@ -306,6 +302,8 @@ void LoadGame(_Game& t)
 	}
 	}
 }
+
+
 int main() {
 Label_main:
 	//...............................

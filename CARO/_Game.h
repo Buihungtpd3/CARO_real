@@ -22,7 +22,7 @@ public:
 	~_Game();
 public:
 	int turnX = 0, turnO = 0;
-	int getTurn();
+	bool getTurn();
 	int getCommand();
 	void setCh(int);
 	int getCh();

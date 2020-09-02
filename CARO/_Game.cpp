@@ -637,7 +637,7 @@ void _Game::saveGame()
 	}
 }
 
-int _Game::getTurn()
+bool _Game::getTurn()
 {
 	return _turn;
 }

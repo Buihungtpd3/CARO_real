@@ -30,14 +30,8 @@
     <ClCompile Include="_Game.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="intro.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="_Menu.cpp">
       <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Test.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
