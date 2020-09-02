@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include <windows.h>
 #include <conio.h>
@@ -12,8 +12,11 @@ class _Menu : public _Common{
 	int _x, _y;
 public:
 	_Menu();
+	// Thiết lập chế độ chơi
 	void setChoice();
+	// Đọc chế độ chơi
 	int getChoice();
+	// In Menu ra màn hình
 	void displayMenu();
 	void print();
 	void printOptions(int X,int Y,char h);
@@ -22,6 +25,8 @@ public:
 	void printOptions_4(int X, int Y, char h);
 	void printOptions_5(int X, int Y, char h);
 	void printOptions_6(int X, int Y, char h);
+	// Ẩn con trỏ
 	void hidePtr();
+	// Hiện con trỏ
 	void showPtr();
 };

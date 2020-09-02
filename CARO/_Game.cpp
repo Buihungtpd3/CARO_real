@@ -40,7 +40,7 @@ char _Game::askContinue() {
 	cout << " NO ";
 	gotoXY(70, 20);
 
-int	c =0;
+int	c = 0;
 	while (c !=13)
 	{
 		c = _getch();
@@ -53,7 +53,7 @@ int	c =0;
 			gotoXY(81, 20);
 			cout << " NO ";
 			k = 0;
-			textColor(199);
+			textColor(240);
 		}
 		if (char(c)=='a' && k == 0) {
 			PlaySound(TEXT("move.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -64,11 +64,12 @@ int	c =0;
 			textColor(224);
 			cout << " YES ";
 			k = 1;
-			textColor(199);
+			textColor(240);
 		}
 	}
 	if (k == 1) return true;
 	else return false;
+	textColor(240);
 	showPtr();
 }
 void _Game::startGame()

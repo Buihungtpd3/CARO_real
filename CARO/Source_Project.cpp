@@ -158,6 +158,7 @@ void PvsE_EZ(_Game& t)
 		else
 		{
 			t.playWithAi_Easy();
+			PlaySound(TEXT("tick.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			if (t.processCheckBoard())
 			{
 				switch (t.processFinish())
@@ -255,6 +256,7 @@ void PvsE_H(_Game&t)
 		else
 		{
 			t.playWithAi_Hard();
+			PlaySound(TEXT("tick.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			if (t.processCheckBoard())
 			{
 				switch (t.processFinish())
