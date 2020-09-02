@@ -1,4 +1,4 @@
-#ifndef _Point_H
+﻿#ifndef _Point_H
 #define _Point_H
 #include <iostream>
 class _Point {
@@ -7,12 +7,12 @@ class _Point {
 public:
 	_Point();
 	_Point(int, int);
-	bool setCheck(int);
-	int getCheck();
-	int getX();
-	int getY();
-	void setX(int);
-	void setY(int);
+	bool setCheck(int); // Đặt trạng thái bàn cờ
+	int getCheck();// Đọc trạng thái bàn cờ 
+	int getX();// Đọc tọa độ theo trục X
+	int getY();// Đọc tọa độ theo trục Y
+	void setX(int);// Thiết lâp tọa độ X
+	void setY(int); // Thiêt lập tọa độ Y
 	
 };
 #endif
