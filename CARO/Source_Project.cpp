@@ -50,7 +50,7 @@ void PvsP(_Game& t)
 				switch (t.processFinish())
 					{
 				case -1: case 1: case 0:
-					if (t.askContinue() == 'Y' || t.askContinue() == 'y')
+					if (t.askContinue())
 					{
 						_Common::textColor(240);
 						t.startGame();
@@ -166,7 +166,7 @@ void PvsE_EZ(_Game& t)
 				{
 				case -1: case 1: case 0:
 				{
-					if (t.askContinue() == 'Y')
+					if (t.askContinue() )
 					{
 						_Common::textColor(240);
 						t.startGame();
@@ -236,7 +236,7 @@ void PvsE_H(_Game&t)
 					{
 					case -1: case 1: case 0:
 					{
-						if (t.askContinue() != 'Y')
+						if (t.askContinue())
 						{
 							_Common::textColor(240);
 							t.startGame();
@@ -264,7 +264,7 @@ void PvsE_H(_Game&t)
 				{
 				case -1: case 1: case 0:
 				{
-					if (t.askContinue() != 'Y')
+					if (t.askContinue() )
 					{
 						_Common::textColor(240);
 						t.startGame();
