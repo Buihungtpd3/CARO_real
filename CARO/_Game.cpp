@@ -24,7 +24,7 @@ char _Game::waitKeyBoard() {
 	_command = toupper(_getch());
 	return _command;
 }
-char _Game::askContinue() {
+bool _Game::askContinue() {
 	hidePtr();
 	system("cls");
 	int k = 1;
