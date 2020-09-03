@@ -71,13 +71,6 @@ void PvsP(_Game& t)
 				t.saveGame();
 				return;
 			}
-			case 'T':
-			{
-				system("cls");
-				cout << "Goi ham Load game";
-				break;
-			}
-
 			}
 		}
 	}
@@ -121,12 +114,6 @@ void PvsE_EZ(_Game& t)
 						system("cls");
 						t.saveGame();
 						return;
-					}
-					case 'T':
-					{
-						system("cls");
-						cout << "Goi ham Load game";
-						break;
 					}
 
 					}
@@ -221,12 +208,7 @@ void PvsE_H(_Game&t)
 						t.saveGame();
 						return;
 					}
-					case 'T':
-					{
-						system("cls");
-						cout << "Goi ham Load game";
-						break;
-					}
+					
 					}
 					t.waitKeyBoard();
 				} while (t.getCommand() != 13);
