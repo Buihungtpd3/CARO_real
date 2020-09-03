@@ -59,7 +59,7 @@ void _Menu::print()
 	_x = X;
 	_y = Y;
 	gotoXY(_x, _y);
-	PlaySound(TEXT("intro2.wav"), NULL, SND_FILENAME | SND_ASYNC);
+	PlaySound(TEXT("intro2.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
 	while (true)
 	{
 		int color = 1 + rand() % (15 + 1 - 1);
@@ -93,7 +93,7 @@ void _Menu::print()
 			case 119:
 			{
 				//chen am thanh 
-				PlaySound(TEXT("move.wav"), NULL, SND_FILENAME | SND_ASYNC);
+				//PlaySound(TEXT("move.wav"), NULL, SND_FILENAME | SND_ASYNC);
 				if (_y >= 23 && _y <= 28) {
 					_y--; gotoXY(_x, _y);
 				}
@@ -140,7 +140,7 @@ void _Menu::print()
 			case 115:
 			{
 				//chen am thanh 
-				PlaySound(TEXT("move.wav"), NULL, SND_FILENAME | SND_ASYNC);
+				//PlaySound(TEXT("move.wav"), NULL, SND_FILENAME | SND_ASYNC);
 				if (_y >= 23 && _y <= 28) {
 					_y++; gotoXY(_x, _y);
 				}
@@ -350,4 +350,8 @@ void _Menu::showPtr()
 	Info.bVisible = TRUE;
 	Info.dwSize = 20;
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &Info);
+}
+void _Menu::PlayBackSound()
+{
+	PlaySound(TEXT("intro2.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
 }

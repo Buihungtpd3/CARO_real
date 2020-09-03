@@ -7,6 +7,8 @@
 #include <fstream>
 #include <string>
 #include <set>
+
+
 class _Game : public _Board {
 private:
 	_Board* _b; // Bàn cờ
@@ -56,6 +58,7 @@ public:
 	// kiểm tra tính hợp lệ của nước đi
 	bool processCheckBoard();
 	// Di chuyển Phải, trái trên dưới trong bàn cờ 
+	
 	void moveRight();
 	void moveLeft();
 	void moveUp();

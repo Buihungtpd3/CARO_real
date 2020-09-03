@@ -4,7 +4,7 @@
 #include <conio.h>
 #include <stdlib.h>
 #include "_Common.h"
-
+#include <thread>
 using namespace std;
 
 class _Menu : public _Common{
@@ -25,6 +25,7 @@ public:
 	void printOptions_4(int X, int Y, char h);
 	void printOptions_5(int X, int Y, char h);
 	void printOptions_6(int X, int Y, char h);
+	static void PlayBackSound();
 	// Ẩn con trỏ
 	void hidePtr();
 	// Hiện con trỏ
