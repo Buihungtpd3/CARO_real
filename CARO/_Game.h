@@ -48,7 +48,7 @@ public:
 	// Chờ nhập phím
 	char waitKeyBoard();
 	// Tiếp tục chơi ở chế độ cũ hay không
-	char askContinue();
+	bool askContinue();
 	// Khởi tạo game
 	void startGame();
 	// Thoát game
