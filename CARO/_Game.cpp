@@ -32,19 +32,20 @@ bool _Game::askContinue() {
 	backGround(50, 15, 58, 10, 192);
 	gotoXY(65, 17);
 	textColor(224);
-	cout << " DO YOU WANT TO PLAY AGIAN? ";
+	cout << " DO YOU WANT TO PLAY AGAIN? ";
 	textColor(199);
 	gotoXY(70, 20);
 	cout << " YES ";
+	textColor(224);
 	gotoXY(81, 20);
 	cout << " NO ";
-	gotoXY(70, 20);
-
-int	c = 0;
+char	c = '  ';
 	while (c !=13)
 	{
 		c = _getch();
-		if (char(c) == 'd' && k == 1) {
+		switch(c)
+		{ case 'd':
+		{
 			PlaySound(TEXT("move.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			textColor(199);
 			gotoXY(70, 20);
@@ -54,8 +55,9 @@ int	c = 0;
 			cout << " NO ";
 			k = 0;
 			textColor(240);
+			break;
 		}
-		if (char(c)=='a' && k == 0) {
+		case 'a':{
 			PlaySound(TEXT("move.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			textColor(199);
 			gotoXY(81, 20);
@@ -65,12 +67,14 @@ int	c = 0;
 			cout << " YES ";
 			k = 1;
 			textColor(240);
+			break;
+		}
 		}
 	}
+	showPtr();
 	if (k == 1) return true;
 	else return false;
 	textColor(240);
-	showPtr();
 }
 void _Game::startGame()
 {
