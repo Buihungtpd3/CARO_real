@@ -674,10 +674,9 @@ void _Game::rule() {
 	gotoXY(90, 25);
 	textColor(224);
 	cout << " >> BACK ";
-	cin.ignore();
-	if (_kbhit())
-	{
-		char key = _getch();
+	int key = 0;
+	while (key != 13) {
+		key = _getch();
 	}
 
 	textColor(240);
