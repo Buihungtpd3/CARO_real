@@ -88,49 +88,41 @@ void PvsE_EZ(_Game& t)
 		if (t.getTurn())
 		{
 			t.waitKeyBoard();
-			if (t.getCommand() == 27)// Neu bang ESC thi luu game roi thoat
+			switch (t.getCommand())
 			{
-				t.exitGame();
+			case 'A':
+			{
+				t.moveLeft();
+				break;
 			}
-			else
+			case 'W':
 			{
-				do {
-					switch (t.getCommand())
-					{
-					case 'A':
-						t.moveLeft();
-						break;
-					case 'W':
-						t.moveUp();
-						break;
-					case 'D':
-						t.moveRight();
-						break;
-					case 'S':
-						t.moveDown();
-						break;
-					case 'L':
-					{
-						system("cls");
-						t.saveGame();
-						return;
-					}
-
-					}
-					t.waitKeyBoard();
-				} while (t.getCommand() != 13);
+				t.moveUp();
+				break;
+			}
+			case 'D':
+			{
+				t.moveRight();
+				break;
+			}
+			case 'S':
+			{
+				t.moveDown();
+				break;
+			}
+			case 13:
+			{
+				PlaySound(TEXT("tick.wav"), NULL, SND_FILENAME | SND_ASYNC);
 				if (t.processCheckBoard())
 				{
 					switch (t.processFinish())
 					{
 					case -1: case 1: case 0:
-					{
-						
 						if (t.askContinue())
 						{
 							_Common::textColor(240);
 							t.startGame();
-							//return PvsE_EZ(t);
+							return PvsP(t);
 						}
 						else
 						{
@@ -138,9 +130,17 @@ void PvsE_EZ(_Game& t)
 							return;
 						}
 					}
-					}
 				}
-			}			
+				break;
+			}
+			case 'L':
+			{
+				system("cls");
+				t.saveGame();
+				return;
+			}
+
+			}
 		}
 		//Luot cua may 	
 		else
@@ -181,48 +181,41 @@ void PvsE_H(_Game&t)
 		if (t.getTurn())
 		{
 			t.waitKeyBoard();
-			if (t.getCommand() == 27)// Neu bang ESC thi luu game roi thoat
+			switch (t.getCommand())
 			{
-				t.exitGame();
+			case 'A':
+			{
+				t.moveLeft();
+				break;
 			}
-			else
+			case 'W':
 			{
-				do {
-					switch (t.getCommand())
-					{
-					case 'A':
-						t.moveLeft();
-						break;
-					case 'W':
-						t.moveUp();
-						break;
-					case 'D':
-						t.moveRight();
-						break;
-					case 'S':
-						t.moveDown();
-						break;
-					case 'L':
-					{
-						system("cls");
-						t.saveGame();
-						return;
-					}
-					
-					}
-					t.waitKeyBoard();
-				} while (t.getCommand() != 13);
+				t.moveUp();
+				break;
+			}
+			case 'D':
+			{
+				t.moveRight();
+				break;
+			}
+			case 'S':
+			{
+				t.moveDown();
+				break;
+			}
+			case 13:
+			{
+				PlaySound(TEXT("tick.wav"), NULL, SND_FILENAME | SND_ASYNC);
 				if (t.processCheckBoard())
 				{
 					switch (t.processFinish())
 					{
 					case -1: case 1: case 0:
-					{
 						if (t.askContinue())
 						{
 							_Common::textColor(240);
 							t.startGame();
-							return PvsE_H(t);
+							return PvsP(t);
 						}
 						else
 						{
@@ -230,8 +223,16 @@ void PvsE_H(_Game&t)
 							return;
 						}
 					}
-					}
 				}
+				break;
+			}
+			case 'L':
+			{
+				system("cls");
+				t.saveGame();
+				return;
+			}
+
 			}
 			
 		}
