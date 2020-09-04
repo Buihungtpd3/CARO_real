@@ -27,7 +27,7 @@ char _Game::waitKeyBoard() {
 bool _Game::askContinue() {
 	hidePtr();
 	system("cls");
-	int k = 1;
+	int k = 0;
 	backGround(52, 16, 58, 10, 112);
 	backGround(50, 15, 58, 10, 192);
 	gotoXY(65, 17);

@@ -90,6 +90,7 @@ void PvsE_EZ(_Game& t)
 			t.waitKeyBoard();
 			switch (t.getCommand())
 			{
+			case 27: return; break;
 			case 'A':
 			{
 				t.moveLeft();
@@ -122,7 +123,7 @@ void PvsE_EZ(_Game& t)
 						{
 							_Common::textColor(240);
 							t.startGame();
-							return PvsP(t);
+							return PvsE_EZ(t);
 						}
 						else
 						{
@@ -183,6 +184,7 @@ void PvsE_H(_Game&t)
 			t.waitKeyBoard();
 			switch (t.getCommand())
 			{
+			case 27: return; break;
 			case 'A':
 			{
 				t.moveLeft();
@@ -215,7 +217,7 @@ void PvsE_H(_Game&t)
 						{
 							_Common::textColor(240);
 							t.startGame();
-							return PvsP(t);
+							return PvsE_H(t);
 						}
 						else
 						{
@@ -320,6 +322,7 @@ Label_main:
 		//Load Game
 		system("cls");
 		LoadGame(t);
+		goto Label_main;
 		break;
 	}
 	case 3://Choi voi may (de) 
