@@ -100,3 +100,25 @@ void  _Common::veDoc(int left, int top, int dai, int color)
 		cout << "   ";
 	}
 }
+//Ham ve vien tren , duoi ========================================================================
+void _Common::drawUpLine(int left, int top, char symbol1, char symbol2, char symbol3, int size)
+{
+	gotoXY(left, top);//Dua con tro den vi tri dau ban co
+	for (int i = 0; i <= size * 4; i++)
+	{
+		if (i == 0) cout << symbol1;//218 la ma ascii cua goc vuong ben trai phia tren
+		else if (i == size * 4) cout << symbol2;//191 la ma ascii cua goc vuong phai phia tren
+		else cout << symbol3;
+	}
+}
+
+//Ham ve vien trai, phai =============================================================================
+void _Common::drawSlideLine(int left, int top, char symbol, int size)
+{
+	gotoXY(left, top);
+	for (int i = 0; i < size * 2 - 1; i++)
+	{
+		gotoXY(left, i + top + 1);
+		cout << symbol;
+	}
+}

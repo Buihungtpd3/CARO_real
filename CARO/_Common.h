@@ -6,7 +6,7 @@
 #include <Windows.h>
 using namespace std;
 class _Common {
-public: 
+public:
 	// Đặt lại kích thước màn hình 
 	static void resizeConsole(int, int);
 	// Cố định kích thước màn hình
@@ -25,5 +25,11 @@ public:
 	static void veNgang(int left, int top, int dai, int color);
 	// Vẽ đường thẳng dọc
 	static void veDoc(int left, int top, int dai, int color);
+public:
+	// Vẽ viền trái
+	static void drawSlideLine(int, int, char, int);
+	// Vẽ viền phải
+	static void drawUpLine(int, int, char, char, char, int);
+
 };
 #endif

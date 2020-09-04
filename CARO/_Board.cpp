@@ -24,8 +24,8 @@ _Board::_Board(int pSize, int pX, int pY)
 	_size = pSize;
 	_left = pX;
 	_top = pY;
-	_pArr = new _Point * [pSize+1];
-	for (int i = 0; i <= pSize; i++) _pArr[i] = new _Point  [pSize];
+	_pArr = new _Point * [pSize + 1];
+	for (int i = 0; i <= pSize; i++) _pArr[i] = new _Point[pSize];
 }
 _Board::~_Board() {
 	for (int i = 0; i < _size; i++) delete[] _pArr[i];
@@ -42,49 +42,28 @@ void _Board::resetData() {
 		}
 	}
 }
-//Ham ve vien tren , duoi ========================================================================
-void _Board::drawUpLine(int left, int top, char symbol1,char symbol2, char symbol3,int size)
-{
-	_Common::gotoXY(left, top);//Dua con tro den vi tri dau ban co
-	for (int i = 0; i <= size * 4; i++)
-	{
-		if (i == 0) cout << symbol1;//218 la ma ascii cua goc vuong ben trai phia tren
-		else if (i == size * 4) cout <<symbol2;//191 la ma ascii cua goc vuong phai phia tren
-		else cout << symbol3;
-	}
-}
 
-//Ham ve vien trai, phai =============================================================================
-void _Board::drawSlideLine(int left, int top, char symbol, int size)
-{
-	_Common::gotoXY(left, top);
-	for (int i = 0; i < size * 2 - 1; i++)
-	{
-		_Common::gotoXY(left, i + top + 1);
-		cout << symbol;
-	}
-}
 void _Board::drawBoard() {
 	//Ve ban co
 	if (_pArr == NULL) return;
 	for (int i = 0; i <= _size; i++) {
-		
+
 		for (int j = 0; j <= _size; j++) {
-			
+
 			_Common::gotoXY(_left + 4 * i, _top + 2 * j);
 			printf(".");
 		}
 	}
 	//Ve vien (char + so  la ky tu dac biet trong ascii)
-	drawUpLine(_left, _top, (char)218, (char)191, (char)196, _size);//Ve vien tren
-	drawSlideLine(_left + 4 * _size, _top, (char)179, _size);//Ve vien ben phai
-	drawUpLine(_left, _top + _size * 2,(char) 192, (char)217, (char)196,_size);//Ve vien duoi
-	drawSlideLine(_left, _top, (char)179,_size);//Ve vien ben trai
+	_Common::drawUpLine(_left, _top, (char)218, (char)191, (char)196, _size);//Ve vien tren
+	_Common::drawSlideLine(_left + 4 * _size, _top, (char)179, _size);//Ve vien ben phai
+	_Common::drawUpLine(_left, _top + _size * 2, (char)192, (char)217, (char)196, _size);//Ve vien duoi
+	_Common::drawSlideLine(_left, _top, (char)179, _size);//Ve vien ben trai
 	//Ve cai bang nho nho xinh xinh ben canh ban co
-	drawUpLine(_left + _size*4+20, _top +10, (char)201, (char)187, (char)205, 10);//Ve vien tren
-	drawSlideLine(_left + _size*4+20+40, _top+10, (char)186, 6);//Ve vien ben phai
-	drawUpLine(_left + _size * 4 + 20, _top + 6 * 2 +10, (char)200, (char)188, (char)205, 10);//Ve vien duoi
-	drawSlideLine(_left+_size*4+20, _top+10, (char)186, 6);//Ve vien ben trai
+	_Common::drawUpLine(_left + _size * 4 + 20, _top + 10, (char)201, (char)187, (char)205, 10);//Ve vien tren
+	_Common::drawSlideLine(_left + _size * 4 + 20 + 40, _top + 10, (char)186, 6);//Ve vien ben phai
+	_Common::drawUpLine(_left + _size * 4 + 20, _top + 6 * 2 + 10, (char)200, (char)188, (char)205, 10);//Ve vien duoi
+	_Common::drawSlideLine(_left + _size * 4 + 20, _top + 10, (char)186, 6);//Ve vien ben trai
 	//In cai bang
 	_Common::textColor(240);
 	_Common::gotoXY(_left + _size * 4 + 30, _top + 12);
@@ -96,10 +75,10 @@ void _Board::drawBoard() {
 	_Common::gotoXY(_left + _size * 4 + 22, _top + 16);
 	cout << "PRESS L TO SAVE GAME";
 	_Common::gotoXY(_left + _size * 4 + 22, _top + 18);
-	cout << "PRESS ESC TO EXIT GAME"; 
+	cout << "PRESS ESC TO EXIT GAME";
 	_Common::gotoXY(_pArr[0][0].getX(), _pArr[0][0].getY());
 }
-int _Board::checkBoard (int pX, int pY, bool pTurn) {
+int _Board::checkBoard(int pX, int pY, bool pTurn) {
 	for (int i = 0; i < _size; i++) {
 		for (int j = 0; j < _size; j++)
 		{
@@ -109,7 +88,7 @@ int _Board::checkBoard (int pX, int pY, bool pTurn) {
 				else _pArr[i][j].setCheck(1);
 				return _pArr[i][j].getCheck();
 			}
-		}				
+		}
 	}
 	return 0;
 }
@@ -141,11 +120,11 @@ bool _Board::checkRow(int i, int j)
 			break;
 		}
 	}
-	if (countLeft + countRight >= 5 and Exception != 2 ) return true;
+	if (countLeft + countRight >= 5 and Exception != 2) return true;
 	return false;
 }
 //Kiem tra cot ( i hang va j cot)
-bool _Board :: checkColum(int i, int j)
+bool _Board::checkColum(int i, int j)
 {
 	int countLeft = 0;
 	int countRight = 0;
@@ -190,7 +169,7 @@ bool _Board::checkMainDioganal(int i, int j)
 			l--;
 			countLeft++;
 		}
-		
+
 		else
 		{
 			if (_pArr[k][l].getCheck() != 0)
@@ -205,7 +184,7 @@ bool _Board::checkMainDioganal(int i, int j)
 			l_1++;
 			countRight++;
 		}
-		
+
 		else
 		{
 			if (_pArr[k][l_1].getCheck() != 0)
@@ -257,10 +236,10 @@ bool _Board::checkSubDioganal(int i, int j)
 	if (countLeft + countRight >= 5 and Exception != 2) return true;
 	return false;
 }
-int _Board::testBoard(int i, int j, bool pturn) { 
+int _Board::testBoard(int i, int j, bool pturn) {
 	//kiem tra thang thua va tra lai ket qua : -1: player 1 win, 1: player 2 win, 0: hoa, 2 binh thuong.
 	_cdraw++;
-	if (checkRow(i, j) == true || checkColum(i,j) == true || checkMainDioganal(i,j) == true || checkSubDioganal(i,j) == true)
+	if (checkRow(i, j) == true || checkColum(i, j) == true || checkMainDioganal(i, j) == true || checkSubDioganal(i, j) == true)
 	{
 		if (pturn) return -1; // X win
 		else return 1;// O win
@@ -269,7 +248,7 @@ int _Board::testBoard(int i, int j, bool pturn) {
 		return 0;
 	return 2;
 }
-_Board::_Board(){
+_Board::_Board() {
 	_left = 0;
 	_top = 0;
 	_size = 0;
@@ -972,9 +951,9 @@ _Point _Board::findTheBestMove_1()
 	_Point curentCell;
 	int row = 0, colum = 0;
 	long Diem = 0;
-	for (int i = 0; i < _size-1; i++)
+	for (int i = 0; i < _size - 1; i++)
 	{
-		for (int j = 0; j < _size-1; j++)
+		for (int j = 0; j < _size - 1; j++)
 		{
 			long DiemTanCong = 0;
 			long DiemPhongThu = 0;
@@ -1004,7 +983,7 @@ _Point _Board::findTheBestMove_1()
 					if (Diem < DiemPhongThu)
 					{
 						Diem = DiemPhongThu;
-						row = i; 
+						row = i;
 						colum = j;
 					}
 				}
@@ -1063,7 +1042,7 @@ _Point _Board::findTheBestMove_2()
 	curentCell.setY(_top + row * 2 + 1);
 	return curentCell;
 }
-void _Board:: loadData(int i, int j, int k)
+void _Board::loadData(int i, int j, int k)
 {
 	if (_size == 0) return;
 	_pArr[i][j].setX(4 * j + _left + 2);
@@ -1082,7 +1061,7 @@ void _Board:: loadData(int i, int j, int k)
 		_Common::gotoXY(4 * j + _left + 2, 2 * i + _top + 1);
 		cout << "O";
 		_Common::textColor(240);
-		
+
 	}
 }
 
@@ -1094,7 +1073,7 @@ void _Board::setCheck(int i, int j, int val)
 	_pArr[i][j].setCheck(val);
 	if (val == -1)
 	{
-			//X
+		//X
 		_Common::gotoXY(4 * j + _left + 2, 2 * i + _top + 1);
 		_Common::textColor(253);
 		cout << "X";
@@ -1102,12 +1081,12 @@ void _Board::setCheck(int i, int j, int val)
 	}
 	if (val == 1)
 	{
-		    //O
+		//O
 		_Common::gotoXY(4 * j + _left + 2, 2 * i + _top + 1);
 		_Common::textColor(249);
 		cout << "O";
 		_Common::textColor(240);
 	}
-	
+
 
 }
