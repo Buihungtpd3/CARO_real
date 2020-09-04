@@ -21,7 +21,7 @@ void _Menu::setChoice()
 		_choice = 6;
 	else {
 		_x = X; _y = Y;
-		gotoXY(_x, _y);
+		_Common::gotoXY(_x, _y);
 	}
 	
 }
@@ -47,10 +47,10 @@ void _Menu::print()
 {
 	char key;
 	hidePtr();
-	textColor(244);
+	_Common::textColor(244);
 	int mau = 4;
-	backGround(42, 11, 100, 30, 128);
-	backGround(40, 10, 100, 30, 13);
+	_Common::backGround(32-5, 11, 110, 30, 128);
+	_Common::backGround(30 -5, 10, 110, 30, 13);
 	int X = 100;//Toa do option
 	int Y = 23;//Toa do option
 	int x = X -55;// Toa do chu Caro
@@ -58,33 +58,33 @@ void _Menu::print()
 	printOptions(X , Y , char(248));
 	_x = X;
 	_y = Y;
-	gotoXY(_x, _y);
+	_Common::gotoXY(_x, _y);
 	PlaySound(TEXT("intro2.wav"), NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
 	while (true)
 	{
 		int color = 1 + rand() % (15 + 1 - 1);
-		textColor(color);
-		gotoXY(x, y); cout << "          _                          ";
-		gotoXY(x, ++y); cout << "      ,:::::\\                         ";
-		gotoXY(x, ++y); cout << "     /:::::::|                        ";
-		gotoXY(x, ++y); cout << "    /:::' ::/                         ";
-		gotoXY(x, ++y); cout << "   /:::'      _         __      ___   ";
-		gotoXY(x, ++y); cout << "  /:::'     ,::::\\   /::::\\  / ._. \\  ";
-		gotoXY(x, ++y); cout << " .:::'    /./:| |   |:/     /:/   \\:\\ ";
-		gotoXY(x, ++y); cout << " |:::    /:/  |:|   |:|     |      |          ";
-		gotoXY(x, ++y); cout << " [:::   /:/__ |:| / |:|     \\:\\._./:/ ";
-		gotoXY(x, ++y); cout << " [:::   \\____/ \\_/  |:|      \\_____/  ";
-		gotoXY(x, ++y); cout << " \\:::.          ,~~~~~~~,           ";
-		gotoXY(x, ++y); cout << "  \\::::..  .:::::::::::::::::.        ";
-		gotoXY(x, ++y); cout << "   \\_`::::::::`/``~~     ";
-		gotoXY(x, ++y); cout << "     ~~~~~~~~  ";
+		_Common::textColor(color);
+		_Common::gotoXY(x, y); cout << "          _                          ";
+		_Common::gotoXY(x, ++y); cout << "      ,:::::\\                         ";
+		_Common::gotoXY(x, ++y); cout << "     /:::::::|                        ";
+		_Common::gotoXY(x, ++y); cout << "    /:::' ::/                         ";
+		_Common::gotoXY(x, ++y); cout << "   /:::'      _         __      ___   ";
+		_Common::gotoXY(x, ++y); cout << "  /:::'     ,::::\\   /::::\\  / ._. \\  ";
+		_Common::gotoXY(x, ++y); cout << " .:::'    /./:| |   |:/     /:/   \\:\\ ";
+		_Common::gotoXY(x, ++y); cout << " |:::    /:/  |:|   |:|     |      |          ";
+		_Common::gotoXY(x, ++y); cout << " [:::   /:/__ |:| / |:|     \\:\\._./:/ ";
+		_Common::gotoXY(x, ++y); cout << " [:::   \\____/ \\_/  |:|      \\_____/  ";
+		_Common::gotoXY(x, ++y); cout << " \\:::.          ,~~~~~~~,           ";
+		_Common::gotoXY(x, ++y); cout << "  \\::::..  .:::::::::::::::::.        ";
+		_Common::gotoXY(x, ++y); cout << "   \\_`::::::::`/``~~     ";
+		_Common::gotoXY(x, ++y); cout << "     ~~~~~~~~  ";
 		x = X-55; y = Y -5;
 		Sleep(150);
 		showPtr();
 		if (_kbhit())
 		{
 			key = _getch();
-			textColor(mau);
+			_Common::textColor(mau);
 
 			if (key == 13) return;
 
@@ -95,7 +95,7 @@ void _Menu::print()
 				//chen am thanh 
 				//PlaySound(TEXT("move.wav"), NULL, SND_FILENAME | SND_ASYNC);
 				if (_y >= 23 && _y <= 28) {
-					_y--; gotoXY(_x, _y);
+					_y--; _Common::gotoXY(_x, _y);
 				}
 				switch (_y)
 				{
@@ -142,7 +142,7 @@ void _Menu::print()
 				//chen am thanh 
 				//PlaySound(TEXT("move.wav"), NULL, SND_FILENAME | SND_ASYNC);
 				if (_y >= 23 && _y <= 28) {
-					_y++; gotoXY(_x, _y);
+					_y++; _Common::gotoXY(_x, _y);
 				}
 				switch (_y)
 				{
@@ -190,7 +190,7 @@ void _Menu::print()
 			if (_y < 23 || _y > 28)
 			{
 				_x = 100 ; _y = 23;
-				gotoXY(_x, _y);
+				_Common::gotoXY(_x, _y);
 				printOptions(_x, _y, (char)175);
 			}
 		}
@@ -202,20 +202,20 @@ void _Menu::printOptions(int X,int Y, char h)
 {
 	int x = X;
 	int y = Y;
-	gotoXY(x, y);
+	_Common::gotoXY(x, y);
 	
-	textColor(26);
+	_Common::textColor(26);
 	cout << (char)175 << " NEWGAME";
-	textColor(4);
-	gotoXY(x, ++y);
+	_Common::textColor(4);
+	_Common::gotoXY(x, ++y);
 	cout << h << " LOAD GAME";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " PLAY WITH PC (EASY)";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " PLAY WITH PC (HARD)";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " RULE";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " QUIT";
 
 }
@@ -223,21 +223,21 @@ void _Menu::printOptions_2(int X, int Y, char h)
 {
 	int x = X;
 	int y = Y;
-	gotoXY(x, y);
+	_Common::gotoXY(x, y);
 	cout << h << " NEWGAME";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	//==============================
-	textColor(26);
+	_Common::textColor(26);
 	cout << (char)175  << " LOAD GAME";
-	textColor(4);
+	_Common::textColor(4);
 	//=======================================
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " PLAY WITH PC (EASY)";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " PLAY WITH PC (HARD)";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " RULE";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " QUIT";
 	
 }
@@ -245,23 +245,23 @@ void _Menu::printOptions_3(int X, int Y, char h)
 {
 	int x = X;
 	int y = Y;
-	gotoXY(x, y);
+	_Common::gotoXY(x, y);
 	cout << h << " NEWGAME";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 
 	cout << h <<" LOAD GAME";
 	
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	//==============================
-	textColor(26);
+	_Common::textColor(26);
 	cout << (char)175 << " PLAY WITH PC (EASY)";
-	textColor(4);
+	_Common::textColor(4);
 	//=======================================
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " PLAY WITH PC (HARD)";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " RULE";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " QUIT";
 
 	
@@ -270,21 +270,21 @@ void _Menu::printOptions_4(int X, int Y, char h)
 {
 	int x = X;
 	int y = Y;
-	gotoXY(x, y);
+	_Common::gotoXY(x, y);
 	cout << h <<" NEWGAME";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h <<" LOAD GAME";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " PLAY WITH PC (EASY)";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	//==============================
-	textColor(26);
+	_Common::textColor(26);
 	cout << (char)175 << " PLAY WITH PC (HARD)";
-	textColor(4);
+	_Common::textColor(4);
 	//=======================================
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " RULE";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " QUIT";
 	
 	
@@ -293,23 +293,23 @@ void _Menu::printOptions_5(int X, int Y, char h)
 {
 	int x = X;
 	int y = Y;
-	gotoXY(x, y);
+	_Common::gotoXY(x, y);
 	cout << h <<" NEWGAME";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 
 	cout << h << " LOAD GAME";
 	
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " PLAY WITH PC (EASY)";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " PLAY WITH PC (HARD)";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	//==============================
-	textColor(26);
+	_Common::textColor(26);
 	cout << (char)175 << " RULE";
-	textColor(4);
+	_Common::textColor(4);
 	//=======================================
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " QUIT";
 	
 }
@@ -317,23 +317,23 @@ void _Menu::printOptions_6(int X, int Y, char h)
 {
 	int x = X;
 	int y = Y;
-	gotoXY(x, y);
+	_Common::gotoXY(x, y);
 	cout << h <<" NEWGAME";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	
 	cout << h <<" LOAD GAME";
 	
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " PLAY WITH PC (EASY)";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " PLAY WITH PC (HARD)";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	cout << h << " RULE";
-	gotoXY(x, ++y);
+	_Common::gotoXY(x, ++y);
 	//==============================
-	textColor(26);
+	_Common::textColor(26);
 	cout << (char)175 << " QUIT";
-	textColor(4);
+	_Common::textColor(4);
 	//=======================================
 	
 }

@@ -87,15 +87,15 @@ void _Board::drawBoard() {
 	drawSlideLine(_left+_size*4+20, _top+10, (char)186, 6);//Ve vien ben trai
 	//In cai bang
 	_Common::textColor(240);
-	gotoXY(_left + _size * 4 + 30, _top + 12);
+	_Common::gotoXY(_left + _size * 4 + 30, _top + 12);
 	cout << "PLAYER 1";
-	gotoXY(_left + _size * 4 + 48, _top + 12);
+	_Common::gotoXY(_left + _size * 4 + 48, _top + 12);
 	cout << "PLAYER 2";
-	gotoXY(_left + _size * 4 + 22, _top + 14);
+	_Common::gotoXY(_left + _size * 4 + 22, _top + 14);
 	cout << "Turn:";
-	gotoXY(_left + _size * 4 + 22, _top + 16);
+	_Common::gotoXY(_left + _size * 4 + 22, _top + 16);
 	cout << "PRESS L TO SAVE GAME";
-	gotoXY(_left + _size * 4 + 22, _top + 18);
+	_Common::gotoXY(_left + _size * 4 + 22, _top + 18);
 	cout << "PRESS ESC TO EXIT GAME"; 
 	_Common::gotoXY(_pArr[0][0].getX(), _pArr[0][0].getY());
 }
@@ -1071,17 +1071,17 @@ void _Board:: loadData(int i, int j, int k)
 	_pArr[i][j].setCheck(k);
 	if (k == -1)
 	{
-		textColor(249);//X
+		_Common::textColor(249);//X
 		_Common::gotoXY(4 * j + _left + 2, 2 * i + _top + 1);
 		cout << "X";
-		textColor(240);
+		_Common::textColor(240);
 	}
 	if (k == 1)
 	{
-		textColor(249);	//O
+		_Common::textColor(249);	//O
 		_Common::gotoXY(4 * j + _left + 2, 2 * i + _top + 1);
 		cout << "O";
-		textColor(240);
+		_Common::textColor(240);
 		
 	}
 }
@@ -1096,17 +1096,17 @@ void _Board::setCheck(int i, int j, int val)
 	{
 			//X
 		_Common::gotoXY(4 * j + _left + 2, 2 * i + _top + 1);
-		textColor(253);
+		_Common::textColor(253);
 		cout << "X";
-		textColor(240);
+		_Common::textColor(240);
 	}
 	if (val == 1)
 	{
 		    //O
 		_Common::gotoXY(4 * j + _left + 2, 2 * i + _top + 1);
-		textColor(249);
+		_Common::textColor(249);
 		cout << "O";
-		textColor(240);
+		_Common::textColor(240);
 	}
 	
 

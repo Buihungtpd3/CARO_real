@@ -7,7 +7,7 @@
 #include <thread>
 using namespace std;
 
-class _Menu : public _Common{
+class _Menu{
 	int _choice;
 	int _x, _y;
 public:
@@ -27,7 +27,7 @@ public:
 	void printOptions_6(int X, int Y, char h);
 	static void PlayBackSound();
 	// Ẩn con trỏ
-	void hidePtr();
+	static void hidePtr();
 	// Hiện con trỏ
-	void showPtr();
+	static void showPtr();
 };

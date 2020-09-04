@@ -18,12 +18,12 @@ public:
 	// Vẽ hình chữ nhật << Left: lề trái, Top: Lề trên, Wide: chiều rộng, Height: Chiều cao, Color: Màu >> 
 	static void backGround(int left, int top, int wide, int height, int color);
 	// Vẽ chéo phụ
-	void cheoTrai(int left, int top, int dai, int cao, int color);
+	static void cheoTrai(int left, int top, int dai, int cao, int color);
 	// Vẽ chéo chính
-	void cheoPhai(int left, int top, int dai, int cao, int color);
+	static void cheoPhai(int left, int top, int dai, int cao, int color);
 	// Vẽ đường thẳng ngang
-	void veNgang(int left, int top, int dai, int color);
+	static void veNgang(int left, int top, int dai, int color);
 	// Vẽ đường thẳng dọc
-	void veDoc(int left, int top, int dai, int color);
+	static void veDoc(int left, int top, int dai, int color);
 };
 #endif

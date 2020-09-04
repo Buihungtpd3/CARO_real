@@ -297,7 +297,7 @@ Label_main:
 	//...............................
 	system("color F1");
 	system("cls");
-	_Common::resizeConsole(1520, 1080);
+	_Common::resizeConsole(1350, 800);
 	_Common::fixConsoleWindow();
 	system("cls");
 	_Menu m;
@@ -305,7 +305,7 @@ Label_main:
 	m.setChoice();
 	m.showPtr();
 	int userChosen = m.getChoice();
-	m.textColor(240);
+	_Common::textColor(240);
 	_Game t(20, 10, 5);
 	// Cac che do 
 	switch (userChosen)

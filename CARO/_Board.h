@@ -10,7 +10,7 @@ const  long Attack_Score1[7] = { 0, 64, 4096, 262144, 16777216, 1073741824 };
 const  long Defend_Score2[7] = { 1, 2, 3, 1, 1, 1 };
 const  long Attack_Score2[7] = { 2, 3, 4, 5, 6, 7 };
 
-class _Board : public _Point, public _Menu{
+class _Board{
 	int _size;
 	int _left, _top;
 	int cdraw = 0;
