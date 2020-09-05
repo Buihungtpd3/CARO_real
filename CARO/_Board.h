@@ -11,20 +11,18 @@ const  long Defend_Score2[7] = { 1, 2, 3, 1, 1, 1 };
 const  long Attack_Score2[7] = { 2, 3, 4, 5, 6, 7 };
 
 class _Board {
+private:
 	int _size;
 	int _left, _top;
-	int cdraw = 0;
 	_Point** _pArr;
 	int _cdraw = 0;
-
-
 public:
-	//Contructor & destructor menthod
+	
 	_Board();
 	_Board(int, int, int);
 	~_Board();
 public:
-	//Bacsic menthod
+	
 	int getSize(); // Kích thước bàn cờ
 	int getLeft();// Lề trái
 	int getTop(); // Lề phải

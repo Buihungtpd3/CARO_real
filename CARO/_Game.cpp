@@ -267,11 +267,72 @@ void _Game::P2Win()
 void _Game::Draw()
 {
 	system("cls");
-	_Common::backGround(52, 16, 58, 10, 112);
-	_Common::backGround(50, 15, 58, 10, 192);
-	_Common::gotoXY(70, 20);
-	_Common::textColor(224);
-	cout << " DRAW ";
+	system("cls");
+	_Menu::hidePtr();
+	int arr[4] = { 43,48,95,96 };
+	int color;
+	int index = 0;
+	for (int i = 0; i < 28; i++)
+	{
+		Sleep(200);
+		index = 0 + rand() % (4);
+		color = arr[index];
+		// D
+
+		_Common::veDoc(50, 8, 10, 112);
+		_Common::veNgang(51, 8, 5, 112);
+		_Common::veNgang(51, 18, 5, 112);
+		_Common::cheoPhai(57, 8, 2, 2, 112);
+		_Common::cheoTrai(57, 16, 2, 2, 112);
+		_Common::veDoc(60, 10, 6, 112);
+
+		_Common::veDoc(45, 7, 10, color);
+		_Common::veNgang(46, 7, 5, color);
+		_Common::veNgang(46, 17, 5, color);
+		_Common::cheoPhai(52, 7, 2, 2, color);
+		_Common::cheoTrai(52, 15, 2, 2, color);
+		_Common::veDoc(55, 9, 6, color);
+		//R
+
+		_Common::veDoc(64, 8, 10, 112);
+		_Common::veNgang(64, 8, 6, 112);
+		_Common::veNgang(64, 13, 6, 112);
+		_Common::veDoc(71, 10, 1, 112);
+		_Common::cheoPhai(68, 13, 5, 5, 112);
+		_Common::cheoPhai(70, 8, 2, 2, 112);
+		_Common::cheoTrai(70, 11, 2, 2, 112);
+
+		_Common::veDoc(59, 7, 10, color);
+		_Common::veNgang(59, 7, 6, color);
+		_Common::veNgang(59, 12, 6, color);
+		_Common::veDoc(67, 9, 1, color);
+		_Common::cheoPhai(63, 12, 5, 5, color);
+		_Common::cheoPhai(65, 7, 2, 2, color);
+		_Common::cheoTrai(65, 10, 2, 2, color);
+
+		//A
+
+		_Common::cheoPhai(85, 8, 10, 10, 112);
+		_Common::cheoTrai(75, 8, 10, 10, 112);
+		_Common::veNgang(80, 13, 8, 112);
+
+		_Common::cheoPhai(80, 7, 10, 10, color);
+		_Common::cheoTrai(70, 7, 10, 10, color);
+		_Common::veNgang(75, 12, 8, color);
+		//W
+
+		_Common::cheoPhai(90, 8, 10, 10, 112);
+		_Common::cheoTrai(100, 13, 3, 3, 112);
+		_Common::cheoPhai(103, 13, 3, 3, 112);
+		_Common::cheoTrai(106, 8, 10, 10, 112);
+
+		_Common::cheoPhai(85, 7, 10, 10, color);
+		_Common::cheoTrai(95, 12, 3, 3, color);
+		_Common::cheoPhai(98, 12, 3, 3, color);
+		_Common::cheoTrai(101, 7, 10, 10, color);
+	}
+	_Common::textColor(240);
+	_Menu::showPtr();
 	if (_kbhit())
 	{
 		char key = _getch();
@@ -297,6 +358,7 @@ int _Game::processFinish() {
 			break; 
 		}
 		case 0: {
+			PlaySound(TEXT("Draw.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			Draw();
 			break;
 		}
